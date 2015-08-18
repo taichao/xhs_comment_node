@@ -1,7 +1,6 @@
 views/.DS_Store
 *.log
 /log/
-node_modules/
 .DS_Store
 .idea/
 host.config.json
