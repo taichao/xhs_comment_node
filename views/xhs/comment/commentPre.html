@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="在线教育管理后台首页">
+    <meta name="description" content="新华社评论管理系统">
     <meta name="author" content="shinc">
     <meta name="keyword" content="shinc edu online">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>真题/模拟题视频</title>
+    <title>新华社评论管理系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -37,9 +37,9 @@
         <section class="wrapper">
             <ol class="breadcrumb">
                 <li>
-                    <a href="#">题目类视频管理</a>
+                    <a href="#">评论管理</a>
                 </li>
-                <li class="active">真题/模拟题视频管理</li>
+                <li class="active">评论管理</li>
             </ol>
             <form id="queryForm">
             <div class="panel panel-default">
@@ -47,138 +47,14 @@
                     <div class="row">
                         <div class="col-xs-1">
                             <div class="form-group">
-                                <label for="questionBank">选择题库</label>
+                                <label for="questionBank">选择分类</label>
                                 <select id="questionBank" name="questionBank" class="form-control">
-                                    <option>请选择题库</option>
+                                    <option>请选择</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-xs-1 col-xs-offset-9">
-                            <button class="btn btn-shadow btn-danger" type="button" id="btnAddPastpaper">新建视频</button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-1">
-                            <div class="form-group">
-                                <label for="course">选择科目</label>
-                                <select id="course" name="course" class="form-control">
-                                    <option value="">--科目--</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="col-xs-1">
-                            <div class="form-group">
-                                <label for="version">选择版本</label>
-                                <select id="version" name="version" class="form-control">
-                                    <option value="">--题库版本--</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="col-xs-1">
-                            <div class="form-group">
-                                <label for="year">选择年份</label>
-                                <select id="year" name="year" class="form-control">
-                                    <option value="">--年份--</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="col-xs-1">
-                            <div class="form-group">
-                                <label for="type">选择题型</label>
-                                <select id="type" name="type" class="form-control">
-                                    <option value="">-题型-</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        
-                        <div class="col-xs-1 col-xs-offset-1" >
-                            <div class="form-group">
-                                <label for="hard">选择难度</label>
-                                <select id="hard" name="hard" class="form-control">
-                                    <option value="">-难度-</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="col-xs-1">
-                            <div class="form-group">
-                                <label for="lecture">选择讲解人</label>
-                                <select id="lecture" name="lecture" class="form-control">
-                                    <option value="">-讲解人-</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="col-xs-1">
-                            <div class="form-group">
-                                <label for="hasVideo">有无视频</label>
-                                <select id="hasVideo" name="hasVideo" class="form-control">
-                                    <option value="">全部</option>
-                                    <option value="0">未上传</option>
-                                    <option value="1">已上传</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-2">
-                            <label for="info">题面信息</label>
-                            <input type="text" class="form-control" id="info" name="info">
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <section class="panel">
-                                <header class="panel-heading">知识点: 
-                                    <button class="btn btn-primary" type="button"><i class="icon-plus"></i></button>
-                                </header>
-                                <div class="panel-body">
-                                    <input value="Flat,Design,Lab,Clean" class="tagsinput" id="tagsinput" name="tagsinput" style="display: none;">                            
-                                    <div class="tagsinput " id="tagsinput_tagsinput" style="height: 100%;">
-                                        <span class="tag">
-                                            <span>Flat&nbsp;&nbsp;</span>
-                                            <a class="tagsinput-remove-link"></a>
-                                        </span>
-                                        <span class="tag">
-                                            <span>Design&nbsp;&nbsp;</span>
-                                            <a class="tagsinput-remove-link"></a>
-                                        </span>
-                                        
-                                        <div id="tagsinput_addTag" class="tagsinput-add-container">
-                                            <div class="tagsinput-add"></div>
-                                            <input data-default="" value="" id="tagsinput_tag" style="color: rgb(0, 0, 0); width: 53px;"></div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-
-                        <div class="col-xs-5">
-                            <section class="panel">
-                                <header class="panel-heading">关键字
-                                    <button class="btn btn-primary" type="button" id="btnAddKeyword"><i class="icon-plus"></i></button>
-                                </header>
-                                <div class="panel-body">
-                                    <div id="keyword"></div>
-                                    <div id="tagsinput_keyword" class="tagsinput " style="height: 100%;">
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-1 col-xs-offset-8">
-                            <button class="btn btn-shadow btn-success" type="button">&nbsp;&nbsp;重置</button>
-                            
-                        </div>
                         <div class="col-xs-1">
                             <button id="btnQuery" class="btn btn-shadow btn-danger" type="button">&nbsp;&nbsp;查询</button>
                             
@@ -234,24 +110,6 @@
 
         </section>
     <!--main content end-->
-        <div class="modal fade" id="keywordModal" tabindex="-1" role="dialog" aria-labelledby="关键字" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">请选择关键字</h4>
-                    </div>
-                    <div class="modal-body">
-                        
-                            <select class="multi-select" multiple="" id="keywordSelect" >
-                           </select>
-                       
-                    </div>
-
-                </div>
-            </div>
-        </div>
-      
      
       
       <%include ../common/alertSuccess.html%>
@@ -309,228 +167,6 @@
         .fail(function(data) {
             console.log("get questionBank error");
         });
-
-        //获取题库相关信息
-        $.ajax({
-            url: '/lecture/lectureListForSelect',
-            type: 'GET',
-            dataType: 'json',
-        })
-        .done(function(data) {
-            console.log("get lecture success");
-            initLecture(data)
-            
-        })
-        .fail(function(data) {
-            console.log("get lecture error");
-        });
-
-        //获取关键字信息
-        $.ajax({
-            url: '/keyword/keywordForSelect',
-            type: 'GET',
-            dataType: 'json',
-        })
-        .done(function(data) {
-            console.log("get keyword success");
-            initKeyword(data)
-            
-        })
-        .fail(function(data) {
-            console.log("get keyword error");
-        });
-        
-        questionBank.bind('change', function(event) {
-            console.log('questionBank changed');
-            var relyon = $(this).val()
-            renderSelect(course,'name','id',relyon,'--科目--')
-            renderSelect(version,'name','id',relyon,'--题库版本--')
-            renderSelect(year,'year','id',relyon,'--年份--')
-            renderSelect(type,'name','id',relyon,'--题型--')
-        });
-
-        //根据返回数据，初始化题库及其依赖信息
-        var initQuestionBank = function(data) {
-            console.log(data);
-            questionBank.data('list', data)
-            $.each(data,function(index, el) {
-                var qbid = el.id + '';
-                course.data(qbid, el.courseList)
-                version.data(qbid, el.questionBankTypeList)
-                year.data(qbid, el.questionBankYearList)
-                type.data(qbid, el.questionTypeList)
-            });
-            renderSelect(questionBank,'name','id')
-            var relyon = questionBank.val()
-            renderSelect(course,'name','id',relyon,'--科目--')
-            renderSelect(version,'name','id',relyon,'--题库版本--')
-            renderSelect(year,'year','id',relyon,'--年份--')
-            renderSelect(type,'name','id',relyon,'--题型--')
-        }
-
-        //初始化讲解人
-        var initLecture = function(data) {
-            console.log(data);
-            lecture.data('list', data)
-            
-            renderSelect(lecture,'name','id',null,'-讲解人-')
-        }
-
-         //初始化关键字
-        var initKeyword = function(data) {
-            console.log(data);
-            keywordSelect.data('list', data)
-            
-            renderSelect(keywordSelect,'name','id',null)
-
-            keywordSelect.multiSelect({
-                selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
-                selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
-                afterInit: function (ms) {
-                    var that = this,
-                        $selectableSearch = that.$selectableUl.prev(),
-                        $selectionSearch = that.$selectionUl.prev(),
-                        selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
-                        selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
-
-                    that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
-                        .on('keydown', function (e) {
-                            if (e.which === 40) {
-                                that.$selectableUl.focus();
-                                return false;
-                            }
-                        });
-
-                    that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
-                        .on('keydown', function (e) {
-                            if (e.which == 40) {
-                                that.$selectionUl.focus();
-                                return false;
-                            }
-                        });
-                },
-                afterSelect: function (e) {
-                    keyword.data(e[0],'true')
-                    console.log('select' + e[0]);
-                    this.qs1.cache();
-                    this.qs2.cache();
-                },
-                afterDeselect: function (e) {
-                    keyword.removeData(e[0])
-                    console.log('dselect' + e[0]);
-                    this.qs1.cache();
-                    this.qs2.cache();
-                }
-              })
-            
-        }
-
-        var renderSelect = function(target,name,value,relyon,firstmessage) {
-            var data
-            if(relyon) {
-
-                data = target.data(relyon)
-
-            } else {
-
-                data = target.data('list')
-                
-            }
-            target.empty();
-            if(firstmessage) {
-                var option = $('<option>').text(firstmessage)
-                target.append(option)
-            }
-            $(data).each(function(index, el) {
-                
-                var option = $('<option>').val(el[value]).text(el[name])
-                target.append(option)
-            });
-        }
-        
-        
-
-        var keywordModal = $('#keywordModal')
-        keywordModal.on('hidden.bs.modal', function(event) {
-            //关键字模态框被隐藏后，处理关键字标签
-            var data = keyword.data();
-            console.log(data);
-            if(data) {
-                tagsinput_keyword.empty()
-                $.each(data,function(key, value) {
-                  var optiontext = keywordSelect.find('option[value='+ key +']').text()
-                  
-                  tagsinput_keyword.append('<span class="tag">' + optiontext + '</span>')
-                });
-            }
-            
-            
-        });
-
-        var btnAddKeyword = $( '#btnAddKeyword' )
-        btnAddKeyword.bind('click', function(event) {
-            
-            keywordModal.modal()
-        });
-
-       //请求查询按钮
-        var btnQuery = $( '#btnQuery' )
-        btnQuery.bind('click', function(event) {
-            queryTable()
-        });
-
-        //向服务端请求数据并处理
-        var queryTable = function(page,limit) {
-
-            var param = getFormData()
-            console.log(param);
-            param.page = page ? page : 0
-            param.limit = limit ? limit : 10
-            console.log(param);
-
-            $.ajax({
-                url: '/pastpaper/pastpaperList',
-                type: 'POST',
-                dataType: 'JSON',
-                data: param
-            })
-            .done(function(data) {
-                console.log("btnQuery ajaxsuccess");
-                console.log(data);
-
-                if(!data || data.code != 'SUCCESS') {
-                    alertIt(data.message)
-                    return
-                }
-                renderTable(data)
-                renderPage(data)
-            })
-            .fail(function(err) {
-                console.log("btnQuery ajax error");
-                console.log(err);
-                alertIt('系统异常，请重新登录')
-            });
-        }
-
-        //查询数据返回后，渲染数据表
-        var renderTable = function(data) {
-            if(data.code !== 'SUCCESS') {
-                alertIt('查询失败')
-            } 
-
-            var data = data.result;
-            tableBody.empty()
-            $(data).each(function(index, el) {
-                
-                var lookButton = addButton('btn btn-info','编辑',[{name:'action',value:'modify'}])
-                lookButton.data('rowdata',el)
-                var dlbutton = addButton('btn btn-info','下载二维码',[{name:'action',value:'download'}])
-                dlbutton.data('rowdata',el)
-                tableBody.append(addTr(el.id,el.title,el.profile,el.courseName,el.year,el.btname,el.typeName,el.question_number,
-                    el.knowledge,el.keyword,el.difficulty,el.lectureName,[lookButton , dlbutton]))
-
-            });
-        }
 
         var prev = $('#prev')
         var next = $('#next')
@@ -619,85 +255,7 @@
 
 
 
-        //新增视频按钮
-        var btnAddPastpaper = $( '#btnAddPastpaper' )
-        btnAddPastpaper.bind('click', function(event) {
-            location.href = '/pastpaper/addPastpaperPre'
-        });
-
-        var getFormData = function() {
-            var toCheck = [
-            {
-              key:'questionBank',
-              name:'题库',
-              type:'select'
-            },
-            {
-              key:'course',
-              name:'科目',
-              type:'select'
-            },
-            {
-              key:'version',
-              name:'题库版本',
-              type:'select'
-            },
-            {
-              key:'year',
-              name:'年份',
-              type:'select'
-            },
-            {
-              key:'type',
-              name:'题型',
-              type:'select'
-            },
-            {
-              key:'lecture',
-              name:'讲解人',
-              type:'select'
-            },
-            {
-              key:'hard',
-              name:'难度',
-              type:'select'
-            },
-            {
-              key:'hasVideo',
-              name:'有无视频',
-              type:'select'
-            },
-            {
-              key:'info',
-              name:'题面信息',
-              type:'input'
-            }
-
-            ];
-            var param = {};
-            $(toCheck).each(function(index, el) {
-
-                var value;
-                if(el.type === 'select') {
-                  value = $('#' + el.key).find('option:selected').attr('value')
-                  
-                } else if(el.type === 'input') {
-                  value = $('#' + el.key).val()
-                }
-                if(value && value !== '') {
-                  param[el.key] = value
-                } 
-            });
-            var keywordValue = keyword.data()
-            var keywordArray = []
-            if(keywordValue) {
-              $.each(keywordValue,function(key, value) {
-                  keywordArray.push(key)
-                });
-            }
-            param['keyword'] = keywordArray
-            return param;
-        }
+        
     });
 
     </script>

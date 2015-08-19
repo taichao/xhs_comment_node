@@ -9,13 +9,14 @@ var remoteRequest = require('libs/remoteRequest');
 /* 进入文章管理界面 */
 router.get('/aritclePre', function(req, res, next) {
 
-  	var baseRequest = remoteRequest(req,res)
+  	//var baseRequest = remoteRequest(req,res)
 	
-	var url = '/getMenu'
-	var data = req.query
-	baseRequest.post(url,data,function(err, response, body) {
+	//var url = '/getMenu'
+	//var data = req.query
+	res.render('xhs/article/aritclePre')
+	/*baseRequest.post(url,data,function(err, response, body) {
 		res.render('xhs/article/aritclePre',JSON.parse(body))
-	})
+	})*/
 });
 
 
