@@ -35,7 +35,7 @@
                        <div class="one">
                            <div class="text1" >查询内容：</div>
                            <div style="" class="col-sm-10 key" style="width:80%">
-                               <input type="text" class="form-control">
+                               <input id="key_search" type="text" class="form-control">
                            </div>
 						   <div style="" class="one key">
 							   <button type="submit" class="search_comment btn btn-danger" style="margin-right:72px">查询</button>
@@ -74,22 +74,11 @@
                             <th><i class="icon-bullhorn"></i>评论id</th>
                             <th class="hidden-phone"><i class="icon-question-sign"></i> 内容</th>
                             <th><i class="icon-bookmark"></i> 昵称</th>
-                            <th><i class=" icon-edit"></i> 评论数</th>
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td><a href="#">Vector Ltd</a></td>
-                            <td class="hidden-phone">Lorem Ipsum dorolo imit</td>
-                            <td>12120.00$ </td>
-                            <td><span class="label label-info label-mini">Due</span></td>
-                            <td>
-                                <button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-                                <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                <button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
-                            </td>
-                        </tr>
+                        <tbody id="comment_list">
+                        
        
                         </tbody>
                     </table>
@@ -150,6 +139,20 @@
         .fail(function(data) {
             console.log("get questionBank error");
         });
+	});
+
+	$('.search_comment').bind('click' , function(){
+		var content = $('#key_search').val();
+		console.log(content);
+		$.ajax({
+			url			: '/comment/search_comment?content='+content,
+			type		: 'GET',
+			dataType	: 'html'
+		})
+		.done(function(data){
+			$('#comment_list').append(data);
+			console.log(data);
+		})
 	});
 </script>
 

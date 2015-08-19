@@ -39,12 +39,18 @@ router.get('/search_comment' , function(req , res , next){
 
 	var url = '/basecomment/queryRemoteComment';
 
-	var data = req.body;
+	var data = req.query;
+	data.queryType = 2;
+	data.num = 10;
+	data.page = 1;
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
 		if('SUCCESS' == jsonStr.code){
-			res.end(JSON.stringify(jsonStr.result))
+			res.render('xhs/comment/comment_list' , jsonStr , function(err , html){
+				res.send(html);
+			});
+			//res.end(JSON.stringify(jsonStr.result))
 		}else{
 			res.redirect('/login');
 		}
