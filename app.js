@@ -10,7 +10,6 @@ var checkLogin = require('libs/checkLogin')
 
 var index = require('./controllers/xhs/index');
 var user = require('./controllers/xhs/user');
-var article = require('./controllers/xhs/article');
 var comment = require('./controllers/xhs/comment');
 
 
@@ -39,7 +38,6 @@ app.use(cookieParser());
 
 app.use('/', index);
 app.use('/user', user);
-app.use('/article', article);
 app.use('/comment', comment);
 
 

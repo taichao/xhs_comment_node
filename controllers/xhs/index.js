@@ -15,7 +15,22 @@ router.get('/login', function(req, res, next) {
 
 router.get('/index' , function(req , res , next){
 	
-	res.render('xhs/index');
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/article/refreshArticleList';
+
+	var data = req.body;
+
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		if('SUCCESS' == jsonStr.code){
+			jsonStr.result = JSON.parse(jsonStr.result);
+			res.render('xhs/index' , jsonStr);
+		}else{
+			res.redirect('/login');
+		}
+	});
+	
 });
 
 router.post('/login', function(req, res, next) {

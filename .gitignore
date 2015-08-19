@@ -5,3 +5,5 @@ views/.DS_Store
 .idea/
 host.config.json
 /logs/
+*.swp
+*.swo
