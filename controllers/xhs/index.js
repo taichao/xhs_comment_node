@@ -13,6 +13,11 @@ router.get('/login', function(req, res, next) {
 		
 });
 
+router.get('/index' , function(req , res , next){
+	
+	res.render('xhs/index');
+});
+
 router.post('/login', function(req, res, next) {
 
   	var baseRequest = remoteRequest(req,res)
@@ -35,7 +40,7 @@ router.post('/login', function(req, res, next) {
 			//设置cookie
 			res.cookie(cookieArray[0], cookieArray[1], { expires: new Date(Date.now() + 900000), httpOnly: true });
 			console.debug(jsonStr);
-			res.render('xhs/index', jsonStr);
+			res.redirect('/index');
 		} else {
 			res.render('xhs/login', jsonStr);
 		}

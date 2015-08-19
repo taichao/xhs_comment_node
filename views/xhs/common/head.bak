@@ -66,7 +66,7 @@
 				<li class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<img alt="" src="../img/avatar1_small.jpg">
-						<span class="username">test</span>
+					<!--	<span class="username"><%=userInfo.userName%></span>-->
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu extended logout">
@@ -90,7 +90,7 @@
 		<div id="sidebar"  class="nav-collapse ">
 			<!-- sidebar menu start-->
 			<ul class="sidebar-menu" id="nav-accordion">
-				<li>
+				<!-- <li>
 				<a class="active" href="/">
 					<i class="icon-dashboard"></i>
 					<span>Dashboard</span>
@@ -140,8 +140,54 @@
 				<ul class="sub">
 					<li><a  href="/user/userList">教师管理</a></li>
 				</ul>
-				</li>
+				</li> -->
 
+			<!-- menu begin-->
+			<%	if(typeof(userInfo) != 'undefined') { %>
+
+			<%
+                var menuMap = userInfo.menuMap;
+                if(Object.prototype.toString.call(menuMap) === '[object Array]') {
+            %>
+
+            <% menuMap.forEach(function(item){  %>
+	            <li class="sub-menu">
+	                <%	if(item.url == 'none'){   %>
+							<a href="javascript:;">
+	                <%	} else {  %> 
+							<a href="<%=item.url%>">
+	                <%	}	%>
+	                		<%	if(item.tag == 'videoManage') {%>
+									<i class="icon-laptop"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'knowledgeManage') {%>
+									<i class="icon-book"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'infoManage') {%>
+									<i class="icon-th"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'adminUserManage') {%>
+									<i class="icon-user"></i>
+	                		<%	} %>
+							<span><%=	item.title	%></span>
+							</a>
+					<%	if(item.sub != null){ 	%>	
+							<ul class="sub">
+							<% item.sub.forEach(function(item2){  %>
+								<li>
+									<a href="<%=item2.url%>">
+										<%=item2.title%>
+									</a>	
+								</li>	
+							<% }); %>
+							</ul>
+					<%	}	%>
+	            </li>
+            <% }); %>
+
+            <%}%>
+
+            <%	}	%>
             <!-- menu end-->
 
 			</ul>

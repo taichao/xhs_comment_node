@@ -6,16 +6,15 @@ var express = require('express');
 var router = express.Router();
 var remoteRequest = require('libs/remoteRequest');
 
-/* 进入文章管理界面 */
-router.get('/commentPre', function(req, res, next) {
+/* 通用评论列表 */
+router.get('/common_comment_list', function(req, res, next) {
 
-  	var baseRequest = remoteRequest(req,res)
-	
-	var url = '/getMenu'
-	var data = req.query
-	baseRequest.post(url,data,function(err, response, body) {
-		res.render('xhs/comment/commentPre',JSON.parse(body))
-	})
+	res.render('xhs/comment/article_comment_list');  	
+});
+
+router.get('/comment', function(req, res, next) {
+
+	res.render('xhs/comment/comment');  	
 });
 
 module.exports=router
