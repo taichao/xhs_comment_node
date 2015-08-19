@@ -2,15 +2,15 @@
 <% result.forEach(function(comment){%>
 <tr>
 	<td>
-		<div class="checkbox">
-			<label>
+
+			
 				<input type="checkbox">
-			</label>
-		</div>
+
+
 		<a href="#"><%= comment.id %></a>
 	</td>
 	<td class="hidden-phone"><%= comment.comment %></td>
-	<td><%= comment.nick %></td>
+	<td ><%= comment.nick %></td>
 	<td>
 		<button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
 		<button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
