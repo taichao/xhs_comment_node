@@ -26,7 +26,7 @@ router.get('/comment_category' , function(req , res , next){
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		if('SUCCESS' == jsonStr.code){
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			res.end(JSON.stringify(jsonStr.result))
 		}else{
 			res.redirect('/login');
@@ -42,17 +42,38 @@ router.get('/search_comment' , function(req , res , next){
 	var data = req.query;
 	data.queryType = 2;
 	data.num = 10;
-	data.page = 1;
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		if('SUCCESS' == jsonStr.code){
+		console.log(jsonStr);
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			res.render('xhs/comment/comment_list' , jsonStr , function(err , html){
 				res.send(html);
 			});
 			//res.end(JSON.stringify(jsonStr.result))
 		}else{
 			res.redirect('/login');
+		}
+	});
+});
+
+router.get('/category_comment' , function(req , res , next){
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/basecomment/queryBaseComment';
+
+	var data = req.query;
+	data.num = 10;
+
+	console.log(data);
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		console.log(jsonStr);
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.render('xhs/comment/category_comment_list' , jsonStr , function(err , html){
+				res.send(html);
+			});
+			//res.end(JSON.stringify(jsonStr.result))
 		}
 	});
 });

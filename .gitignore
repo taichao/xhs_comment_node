@@ -7,3 +7,4 @@ host.config.json
 /logs/
 *.swp
 *.swo
+*.swn

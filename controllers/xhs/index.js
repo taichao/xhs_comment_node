@@ -23,8 +23,7 @@ router.get('/index' , function(req , res , next){
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		if('SUCCESS' == jsonStr.code){
-			jsonStr.result = JSON.parse(jsonStr.result);
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			res.render('xhs/index' , jsonStr);
 		}else{
 			res.redirect('/login');

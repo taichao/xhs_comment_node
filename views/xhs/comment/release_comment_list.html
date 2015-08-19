@@ -141,16 +141,34 @@
 
 	$('.search_comment').bind('click' , function(){
 		var content = $('#key_search').val();
-		console.log(content);
+		var page = 1;
 		$.ajax({
-			url			: '/comment/search_comment?content='+content,
+			url			: '/comment/search_comment?content='+content+'&page='+page,
 			type		: 'GET',
 			dataType	: 'html'
 		})
 		.done(function(data){
 			$('#comment_list').append(data);
-			console.log(data);
 		})
+		.fail(function(){
+			console.log('error');
+		});
+	});
+	$('#category_select').bind('change' , function(){
+		var categoryId = $(this).find("option:selected").val();
+		var page = 1;
+		$.ajax({
+			url			: '/comment/category_comment?categoryId='+categoryId+'&page='+page,
+			type		: 'GET',
+			dataType	: 'html'
+		})
+		.done(function(data){
+			$('#comment_list').append(data);
+		})
+		.fail(function(){
+			console.log('error');
+		});
+		
 	});
 </script>
 
