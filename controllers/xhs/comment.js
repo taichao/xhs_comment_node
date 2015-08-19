@@ -34,4 +34,21 @@ router.get('/comment_category' , function(req , res , next){
 	});	
 });
 
+router.get('/search_comment' , function(req , res , next){
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/basecomment/queryRemoteComment';
+
+	var data = req.body;
+
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		if('SUCCESS' == jsonStr.code){
+			res.end(JSON.stringify(jsonStr.result))
+		}else{
+			res.redirect('/login');
+		}
+	});
+});
+
 module.exports=router

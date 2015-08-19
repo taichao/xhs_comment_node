@@ -28,7 +28,7 @@
                         </tr>
                         </thead>
                         <tbody>
-							<%if(result.length){ %>
+							<% if(result.length){ %>
 							<% result.forEach(function(list){%>
 							<tr>
 								<td><a href="#"><%= list.id %></a></td>
@@ -40,7 +40,7 @@
 									<a href="" class="btn btn-primary">已发评论</a>
 								</td>
 							</tr>
-							<% }}); %>
+							<% });} %>
                         </tbody>
                     </table>
                 </section>

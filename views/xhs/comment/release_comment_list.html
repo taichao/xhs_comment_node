@@ -38,7 +38,7 @@
                                <input type="text" class="form-control">
                            </div>
 						   <div style="" class="one key">
-							   <button type="submit" class="btn btn-danger">查询</button>
+							   <button type="submit" class="search_comment btn btn-danger">查询</button>
 						   </div>
 							<select style="width:auto;" id="category_select" class="form-control category" size="1" name="example_length" aria-controls="example">
 								<option value="0" selected="selected">请选择</option>
@@ -135,6 +135,11 @@
 		.done(function(data) {
             console.log("get questionBank success");
 			console.log(data);
+			$('#category_select').find('option').each(function(index){
+				if(index != 0){
+					this.remove();
+				}
+			});
 			data.forEach(function(category){
 				var domEvent = "<option value='"+category.id+"' >"+category.name+"</option>"
 				$('#category_select').append(domEvent);
