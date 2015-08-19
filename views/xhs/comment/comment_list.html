@@ -1,7 +1,14 @@
 <% if(result.length){%>
 <% result.forEach(function(comment){%>
 <tr>
-	<td><a href="#"><%= comment.id %></a></td>
+	<td>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox"> Check me out
+			</label>
+		</div>
+		<a href="#"><%= comment.id %></a>
+	</td>
 	<td class="hidden-phone"><%= comment.comment %></td>
 	<td><%= comment.nick %></td>
 	<td>
