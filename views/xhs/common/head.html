@@ -64,7 +64,7 @@
 				<li class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<img alt="" src="../img/avatar1_small.jpg">
-						<span class="username">test</span>
+						<span class="username"><%=userInfo.userName%></span>
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu extended logout">
@@ -88,28 +88,53 @@
 		<div id="sidebar"  class="nav-collapse ">
 			<!-- sidebar menu start-->
 			<ul class="sidebar-menu" id="nav-accordion">
-				<!-- menu start-->
-				<li class="sub-menu">
-					<a href="javascript:;" >
-						<i class="icon-laptop"></i>
-						<span>发布评论</span>
-					</a>
-					<ul class="sub">
-						<li><a  href="/index">文章列表</a></li>
-						<!--<li><a  href="/comment/common_comment_list">通用评论库</a></li>-->
-						<!--<li><a  href="/comment/comment">人工评论</a></li>-->
-					</ul>
-				</li>
-				<li class="sub-menu">
-					<a href="javascript:;" >
-						<i class="icon-laptop"></i>
-						<span>通用评论管理</span>
-					</a>
-					<ul class="sub">
-						<li><a  href="/common_comment/common_comment_list">评论列表</a></li>
-					</ul>
-				</li>
+				
+				<!-- menu begin-->
+				<%	if(typeof(userInfo) != 'undefined') { %>
 
+				<%
+					var menuMap = userInfo.menuMap;
+					if(Object.prototype.toString.call(menuMap) === '[object Array]') {
+				%>
+
+				<% menuMap.forEach(function(item){  %>
+					<li class="sub-menu">
+						<%	if(item.url == 'none'){   %>
+								<a href="javascript:;">
+						<%	} else {  %> 
+								<a href="<%=item.url%>">
+						<%	}	%>
+								<%	if(item.tag == 'videoManage') {%>
+										<i class="icon-laptop"></i>
+								<%	} %>
+								<%	if(item.tag == 'knowledgeManage') {%>
+										<i class="icon-book"></i>
+								<%	} %>
+								<%	if(item.tag == 'infoManage') {%>
+										<i class="icon-th"></i>
+								<%	} %>
+								<%	if(item.tag == 'adminUserManage') {%>
+										<i class="icon-user"></i>
+								<%	} %>
+								<span><%=	item.title	%></span>
+								</a>
+						<%	if(item.sub != null){ 	%>	
+								<ul class="sub">
+								<% item.sub.forEach(function(item2){  %>
+									<li>
+										<a href="<%=item2.url%>">
+											<%=item2.title%>
+										</a>	
+									</li>	
+								<% }); %>
+								</ul>
+						<%	}	%>
+					</li>
+				<% }); %>
+
+				<%}%>
+
+				<%	}	%>
 				<!-- menu end-->
 
 			</ul>
