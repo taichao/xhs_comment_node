@@ -36,7 +36,7 @@
 								<td><%= list.releaseDate %></td>
 								<td><span class="label label-info label-mini"><%= list.comment %></span></td>
 								<td>
-									<a href="/comment/release_comment_list" class="btn btn-primary">发评论</a>
+									<a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-primary">发评论</a>
 									<a href="" class="btn btn-primary">已发评论</a>
 								</td>
 							</tr>

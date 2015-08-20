@@ -1,0 +1,9 @@
+<% if(result.length){%>
+<% result.forEach(function(comment){%>
+<tr>
+	<td><input class="checkbox" type="checkbox" name="comment" value="<%= comment.id %>"/></td>
+	<td id="id_<%= comment.id %>" ><%= comment.id %></td>
+	<td id="content_<%= comment.id %>" class="hidden-phone"><%= comment.content %></td>
+	<td id="nickname_<%= comment.id %>"><%= comment.nickName %></td>
+</tr>
+<% });} %>

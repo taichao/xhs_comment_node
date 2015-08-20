@@ -1,17 +1,9 @@
 <% if(result.length){%>
 <% result.forEach(function(comment){%>
 <tr>
-	<td>
-				<input type="checkbox" style="margin-right:20px">
-
-		<a href="#"><%= comment.id %></a>
-	</td>
-	<td class="hidden-phone"><%= comment.comment %></td>
-	<td ><%= comment.nick %></td>
-	<td>
-		<button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-		<button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-		<button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
-	</td>
+	<td><input class="checkbox" type="checkbox" name="comment" value="<%= comment.id %>"/></td>
+	<td id="id_<%= comment.id %>"><%= comment.id %></td>
+	<td id="content_<%= comment.id %>" class="hidden-phone"><%= comment.comment %></td>
+	<td id="nickname_<%= comment.id %>"><%= comment.nick %></td>
 </tr>
 <% });} %>

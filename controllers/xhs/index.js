@@ -19,12 +19,14 @@ router.get('/index' , function(req , res , next){
 
 	var url = '/article/refreshArticleList';
 
-	var data = req.body;
+	var data = {
+		cid:470,
+		ctype:4001
+	};
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		if('SUCCESS' == jsonStr.code){
-			jsonStr.result = JSON.parse(jsonStr.result);
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			res.render('xhs/index' , jsonStr);
 		}else{
 			res.redirect('/login');
@@ -42,6 +44,7 @@ router.post('/login', function(req, res, next) {
 
 	console.debug('req params:' + JSON.stringify(data))
 	baseRequest.post(url,data,function(err, response, body) {
+		console.log(body);
 		var jsonStr = JSON.parse(body);
 		if('SUCCESS' == jsonStr.code) {
 			var setCookie		= response.headers['set-cookie'];
