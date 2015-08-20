@@ -18,7 +18,7 @@ router.get('/common_comment_list' , function(req , res , next){
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
-			res.end(JSON.stringify(jsonStr.result))
+			res.render('xhs/comment/common_comment_list' , jsonStr);
 		}else{
 			res.redirect('/login');
 		}
