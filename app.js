@@ -11,6 +11,7 @@ var checkLogin = require('libs/checkLogin')
 var index = require('./controllers/xhs/index');
 var user = require('./controllers/xhs/user');
 var comment = require('./controllers/xhs/comment');
+var common_comment = require('./controllers/xhs/common_comment');
 
 
 
@@ -39,6 +40,7 @@ app.use(cookieParser());
 app.use('/', index);
 app.use('/user', user);
 app.use('/comment', comment);
+app.use('/common_comment', common_comment);
 
 
 
