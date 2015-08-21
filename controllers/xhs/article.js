@@ -7,13 +7,13 @@ var router = express.Router();
 var remoteRequest = require('libs/remoteRequest');
 
 /* 进入文章管理界面 */
-router.get('/aritclePre', function(req, res, next) {
+router.get('/articlePre', function(req, res, next) {
 
   	//var baseRequest = remoteRequest(req,res)
 	
 	//var url = '/getMenu'
 	//var data = req.query
-	res.render('xhs/article/aritclePre')
+	res.render('xhs/article/articlePre')
 	/*baseRequest.post(url,data,function(err, response, body) {
 		res.render('xhs/article/aritclePre',JSON.parse(body))
 	})*/
