@@ -61,7 +61,7 @@ router.get('/search_comment' , function(req , res , next){
 
 	var data = req.query;
 	data.queryType = 2;
-	data.num = 10;
+	data.num = 50;
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
@@ -83,7 +83,7 @@ router.get('/category_comment' , function(req , res , next){
 	var url = '/basecomment/queryBaseComment';
 
 	var data = req.query;
-	data.num = 10;
+	data.num = 50;
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
@@ -104,6 +104,7 @@ router.get('/push_comment' , function(req , res , next){
 
 	var data = req.query;
 	data.commentList = JSON.parse(data.commentList);
+	console.log(data);
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);

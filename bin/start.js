@@ -4,30 +4,54 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('cook:server');
-var http = require('http');
+var app		= require('../app'),
+	debug	= require('debug')('xhs_comment_node:server'),
+	http	= require('http'),
+	fs = require("fs"),
+	config	= require('../config/config.json');
+	cluster = require('cluster');
+	numCPUs = require('os').cpus().length;
+	numCPUs = 1;
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(config.port);
+
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
+if (cluster.isMaster) {
+	for (var i = 0; i < numCPUs; i++) {
+		cluster.fork();
+	}
 
-var server = http.createServer(app);
+	cluster.on('death', function(worker) {
+		console.log('worker ' + worker.pid + ' died');
+		cluster.fork();
+	});
+	cluster.on('exit', function(worker) {
+		console.log('worker ' + worker.process.pid + ' died');
+		cluster.fork();
+	});
+} else {
+
+	var server = http.createServer(app);
+	
+	server.listen(port);
+	server.on('error', onError);
+	server.on('listening', onListening);
+
+	console.log("Server has started.");
+}
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -88,3 +112,11 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+fs.createWriteStream("../logs/pids", {
+	flags: "w",
+	encoding: "utf-8",
+	mode: 0666
+}).write(process.pid + "\n");
+
+

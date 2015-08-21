@@ -139,6 +139,8 @@ define(function(require , exports , module) {
 		  dataType	: 'html'
 		})
 		.done(function(data){
+			$('#user_nick').val('');
+			$('#user_comment').val('');
 			$('body').append(data);
 		})
 		.fail(function(data){

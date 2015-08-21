@@ -1,18 +1,13 @@
-var express			= require('express');
-var path			= require('path');
-var favicon			= require('serve-favicon');
-var logger			= require('morgan');
-var cookieParser	= require('cookie-parser');
-var bodyParser		= require('body-parser');
-var log4js = require('log4js');
-var checkLogin = require('libs/checkLogin')
+var express			= require('express'),
+	path			= require('path'),
+	favicon			= require('serve-favicon'),
+	logger			= require('morgan'),
+	cookieParser	= require('cookie-parser'),
+	bodyParser		= require('body-parser');
+	//log4js = require('log4js');
 
-
-var index = require('./controllers/xhs/index');
-var user = require('./controllers/xhs/user');
-var comment = require('./controllers/xhs/comment');
-var common_comment = require('./controllers/xhs/common_comment');
-
+//var checkLogin = require('libs/checkLogin');
+var controllers = require('./router');
 
 
 var app = express();
@@ -20,8 +15,8 @@ var app = express();
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(path.join(__dirname, '/public')));
 
-log4js.configure('./config/log4js.json');
-app.use(log4js.connectLogger(log4js.getLogger('normal'), {level:'auto', format:':method :url'}));
+//log4js.configure('../config/log4js.json');
+//app.use(log4js.connectLogger(log4js.getLogger('normal'), {level:'auto', format:':method :url'}));
 
 app.use(require('express-promise')());
 
@@ -30,18 +25,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
 
-app.use(checkLogin);
+//app.use(checkLogin);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
 
-app.use('/', index);
-app.use('/user', user);
-app.use('/comment', comment);
-app.use('/common_comment', common_comment);
 
+controllers(app);
 
 
 // catch 404 and forward to error handler

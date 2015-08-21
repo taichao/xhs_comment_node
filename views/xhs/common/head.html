@@ -64,7 +64,11 @@
 				<li class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<img alt="" src="../img/avatar1_small.jpg">
-						<span class="username"><%=userInfo.userName%></span>
+					<span class="username">
+						<%if(userInfo != null ){%>
+							<%= userInfo.userName %>
+						<% } %>
+					</span>
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu extended logout">
@@ -90,7 +94,7 @@
 			<ul class="sidebar-menu" id="nav-accordion">
 				
 				<!-- menu begin-->
-				<%	if(typeof(userInfo) != 'undefined') { %>
+				<%	if(typeof(userInfo) != 'undefined' && userInfo != null) { %>
 
 				<%
 					var menuMap = userInfo.menuMap;

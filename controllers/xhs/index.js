@@ -26,6 +26,7 @@ router.get('/index' , function(req , res , next){
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
+		console.log(jsonStr);
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			res.render('xhs/index' , jsonStr);
 		}else{
