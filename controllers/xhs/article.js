@@ -20,3 +20,5 @@ router.get('/articleManage_list', function(req, res, next) {
 	res.render('xhs/article/articleManage_list')
 
 });
+
+module.exports = router;

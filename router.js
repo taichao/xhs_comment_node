@@ -6,7 +6,7 @@ var article = require('./controllers/xhs/article');
 
 
 
-module.exports = function controllers(app){
+module.exports = function(app){
 	app.use('/', index);
 	app.use('/user', user);
 	app.use('/comment', comment);
