@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ $USER != "root" ]
-then
-	echo "root only"
+#if [ $USER != "root" ]
+#then
+#	echo "root only"
 	#exit 1
-fi
+#fi
 rf=$(pwd)'/../'
 
 
