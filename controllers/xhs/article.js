@@ -38,9 +38,9 @@ router.post('/addVideoPic', function(req, res, next) {
 });
 
 /*文章管理*/
-router.get('/aritcleManage_list', function(req, res, next) {
+router.get('/articleManage_list', function(req, res, next) {
 
-	res.render('xhs/article/aritcleManage_list')
+	res.render('xhs/article/articleManage_list')
 
 });
 
