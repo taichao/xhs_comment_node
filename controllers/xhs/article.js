@@ -10,8 +10,13 @@ var remoteRequest = require('libs/remoteRequest');
 router.get('/article_list', function(req, res, next) {
 
 	res.render('xhs/article/article_list');
+
 });
 
 
+/*文章管理*/
+router.get('/articleManage_list', function(req, res, next) {
 
-module.exports = router;
+	res.render('xhs/article/articleManage_list')
+
+});
