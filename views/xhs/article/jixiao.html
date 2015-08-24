@@ -1,12 +1,3 @@
-<% if(result.length){ %>
-    <% result.forEach(function(obj){%>
-        <%= obj.id%>
-    <%})%>
-<%}%>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,25 +168,42 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb" style="width:98%;margin:0 auto 10px">
                         <li><a href="#">新闻列表</a></li>
-                        <li>
-                        <a href="#">
-                            <div class="form-group">
-                                <!-- <label for="questionBank"></label> -->
-                               <select id="questionBank" name="questionBank" class="form-control">
-                                     选择昵称: <option value="">请选择昵称</option>
-                                      <% if(result.length){ %>
-                                         <% result.forEach(function(obj){%>
-                                    <option value="<%= obj.userId%>"><%= obj.userNickName%></option>
-                                       <%})%>
-                                     <%}%>  
-                                </select>
-                            </div>
-                        </a>
-                        </li>
                         <!--<li><a href="#">讲解人管理</a></li>-->
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
+
+                 <div class="col-lg-1 col-md-1 col-xs-1" >
+                 <select id="questionBank" name="questionBank" class="form-control">
+                    选择昵称: <option value="">请选择昵称</option>
+                      <% if(result.length){ %>
+                         <% result.forEach(function(obj){%>
+                    <option value="<%= obj.userId%>"><%= obj.userNickName%></option>
+                       <%})%>
+                     <%}%>  
+                </select>
+                </div>
+
+
+
+                 <!-- <div class="col-lg-2 col-md-32 col-xs-2" >
+                    <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value=""/>
+                </div> -->
+               
+
+
+                <div class="form-group" style="margin-right:10px;">
+                    <div class="col-md-3 col-xs-11">
+
+                        <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012"  class="input-append date dpYears">
+                        <input type="text"  value="12-02-2012" size="16" class="form-control">
+                        <span class="input-group-btn add-on">
+                            <button class="btn btn-danger" type="button"><i class="icon-calendar"></i></button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!--列表页面-->
