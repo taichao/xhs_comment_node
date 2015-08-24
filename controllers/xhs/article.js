@@ -27,7 +27,6 @@ router.get('/article_list', function(req, res, next) {
 		res.end(JSON.stringify(data));	
 	});
 
-
 });
 
 

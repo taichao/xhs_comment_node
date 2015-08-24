@@ -177,6 +177,21 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb" style="width:98%;margin:0 auto 10px">
                         <li><a href="#">新闻列表</a></li>
+                        <li>
+                        <a href="#">
+                            <div class="form-group">
+                                <!-- <label for="questionBank"></label> -->
+                               <select id="questionBank" name="questionBank" class="form-control">
+                                     选择昵称: <option value="">请选择昵称</option>
+                                      <% if(result.length){ %>
+                                         <% result.forEach(function(obj){%>
+                                    <option value="<%= obj.userId%>"><%= obj.userNickName%></option>
+                                       <%})%>
+                                     <%}%>  
+                                </select>
+                            </div>
+                        </a>
+                        </li>
                         <!--<li><a href="#">讲解人管理</a></li>-->
                     </ul>
                     <!--breadcrumbs end -->
