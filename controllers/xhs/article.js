@@ -8,7 +8,7 @@ var remoteRequest = require('libs/remoteRequest');
 var remote = require('libs/remote');
 
 /* 进入文章管理界面 */
-router.get('/article_list', function(req, res, next) {
+/*router.get('/article_list', function(req, res, next) {
 	
 	var options = {
 		'index'		: {
@@ -29,11 +29,8 @@ router.get('/article_list', function(req, res, next) {
 
 
 });
-
-
-/*文章管理*/
-router.get('/articleManage_list', function(req, res, next) {
-
+*/
+router.get('/article_list' , function(req , res , next) {
 	var baseRequest = remoteRequest(req , res);
 
 	var url = '/article/getArticleListByDate';
@@ -51,8 +48,37 @@ router.get('/articleManage_list', function(req, res, next) {
 			res.redirect('/login');
 		}
 	});
-
-
 });
+
+
+/*文章管理*/
+router.get('/jixiao', function(req, res, next) {
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/selectCommentJnl';
+
+	var data = {
+		userId		:"1",
+		addDate		:"2015-08-19",
+		pageIndex	:"0",
+		pageCount	:"50"
+	};
+
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		// console.log(jsonStr);
+		// res.end();
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.render('xhs/article/jixiao' , jsonStr);
+		}else{
+			res.redirect('/login');
+		}
+	});	
+	//res.render('xhs/article/articleManage_list')
+});
+
+
+
+
 
 module.exports = router;

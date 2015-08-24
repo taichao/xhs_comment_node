@@ -57,7 +57,7 @@ router.post('/login', function(req, res, next) {
 			console.debug(cookieArray);
 
 			//设置cookie
-			res.cookie(cookieArray[0], cookieArray[1], { expires: new Date(Date.now() + 900000), httpOnly: true });
+			res.cookie(cookieArray[0], cookieArray[1], { expires: new Date(Date.now() + 90000000), httpOnly: true });
 			console.debug(jsonStr);
 			res.redirect('/index');
 		} else {
