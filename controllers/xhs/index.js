@@ -3,18 +3,18 @@ var router = express.Router();
 var remoteRequest = require('libs/remoteRequest');
 
 router.get('/', function(req, res, next) {
-	
+
 	res.render('xhs/login');
-		
+
 });
 router.get('/login', function(req, res, next) {
-	
+
 	res.render('xhs/login');
-		
+
 });
 
 router.get('/index' , function(req , res , next){
-	
+
 	var baseRequest = remoteRequest(req , res);
 
 	var url = '/article/refreshArticleList';
@@ -33,17 +33,17 @@ router.get('/index' , function(req , res , next){
 			res.redirect('/login');
 		}
 	});
-	
+
 });
 
 router.post('/login', function(req, res, next) {
 
-  	var baseRequest = remoteRequest(req,res)
-	
-	var url = '/login'
-	var data = req.body;
+    var baseRequest = remoteRequest(req,res)
 
-	console.debug('req params:' + JSON.stringify(data))
+    var url = '/login'
+    var data = req.body;
+
+    console.log('req params:' + JSON.stringify(data))
 	baseRequest.post(url,data,function(err, response, body) {
 		console.log(body);
 		var jsonStr = JSON.parse(body);

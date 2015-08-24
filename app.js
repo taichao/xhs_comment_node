@@ -4,7 +4,7 @@ var express			= require('express'),
 	logger			= require('morgan'),
 	cookieParser	= require('cookie-parser'),
 	bodyParser		= require('body-parser');
-	//log4js = require('log4js');
+	log4js = require('log4js');
 
 //var checkLogin = require('libs/checkLogin');
 var controllers = require('./router');
@@ -15,8 +15,8 @@ var app = express();
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(path.join(__dirname, '/public')));
 
-//log4js.configure('../config/log4js.json');
-//app.use(log4js.connectLogger(log4js.getLogger('normal'), {level:'auto', format:':method :url'}));
+log4js.configure('../config/log4js.json');
+app.use(log4js.connectLogger(log4js.getLogger('normal'), {level:'auto', format:':method :url'}));
 
 app.use(require('express-promise')());
 

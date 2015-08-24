@@ -5,11 +5,28 @@
 var express = require('express');
 var router = express.Router();
 var remoteRequest = require('libs/remoteRequest');
+var remote = require('libs/remote');
 
 /* 进入文章管理界面 */
 router.get('/article_list', function(req, res, next) {
+	
+	var options = {
+		'index'		: {
+			'url'	: '/api/index',
+			'data'	: '',
+			'method': 'GET'
+		},
+		'test'		: {
+			'url'	: '/api/test',
+			'data'	: '',
+			'method': 'GET'
+		}
+	};
 
-	res.render('xhs/article/article_list');
+	remote(req , res , options , function(data){
+		res.end(JSON.stringify(data));	
+	});
+
 
 });
 
