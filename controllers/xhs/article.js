@@ -34,7 +34,24 @@ router.get('/article_list', function(req, res, next) {
 /*文章管理*/
 router.get('/articleManage_list', function(req, res, next) {
 
-	res.render('xhs/article/articleManage_list')
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/article/getArticleListByDate';
+
+	var data = {
+		publisDate:"2015-08-21"
+	};
+
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		console.log(jsonStr);
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.render('xhs/article/articleManage_list' , jsonStr);
+		}else{
+			res.redirect('/login');
+		}
+	});
+
 
 });
 
