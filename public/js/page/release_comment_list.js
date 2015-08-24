@@ -18,7 +18,6 @@ define(function(require , exports , module) {
 			})
 			.done(function(data) {
 				console.log("get questionBank success");
-				console.log(data);
 				$('#category_select').find('option').each(function(index){
 					if(index != 0){
 						this.remove();
@@ -28,16 +27,14 @@ define(function(require , exports , module) {
 				data.forEach(function(category){
 					var domEvent = "<option value='"+category.id+"' >"+category.item.name+"</option>"
 					if(!category.leaf){
-						console.log(category.leaf);
 						var childEvent = '';
 						category.child.forEach(function(categoryChild){
 							childEvent += "<option value='"+categoryChild.id+"' >"+categoryChild.item.name+"</option>";
 						});
 						child[category.id] = childEvent;
-						console.log(child);
 					}
 					$('#category_select').append(domEvent);
-					var select_id = $('#category_select').find("option:selected").val()	
+					var select_id = $('#category_select').find("option:selected").val()
 				});
 			})
 			.fail(function(data) {
@@ -50,7 +47,7 @@ define(function(require , exports , module) {
 			var page = 1;
 			$('#pre_page').hide();
 			key_search(content , page);
-			
+
 		});
 		$('#category_select').bind('change' , function(){
 			var categoryId = $(this).find("option:selected").val();
@@ -59,31 +56,30 @@ define(function(require , exports , module) {
 			var page = 1;
 			$('#pre_page').hide();
 			category_search(categoryId , page);
-			
+
 		});
 		$('#category_select_child').bind('change' , function(){
 			var categoryId = $(this).find("option:selected").val();
 			var page = 1;
 			$('#pre_page').hide();
 			category_search(categoryId , page);
-			
+
 		});
-		
+
 		$('#submit_commit_more').bind('click' , function(){
 			var data = [];
-			$('input[name="comment"]:checked').each(function(){ 
+			$('input[name="comment"]:checked').each(function(){
 				var comment = {};
 				comment.id = $(this).val();
 				comment.comment = $('#content_'+$(this).val()).html();
 				comment.nick = $('#nickname_'+$(this).val()).html();
 				data.push(comment);
-			}); 
-			console.log(data);
+			});
 			data = JSON.stringify(data);
 			var articleId = $('#article_id').attr('article_id');
 
 			push_comment(articleId , data);
-				
+
 		});
 		$('#submit_commit_one').bind('click' , function(){
 			var data = [];
@@ -91,12 +87,12 @@ define(function(require , exports , module) {
 			comment.comment = $('#user_comment').val();
 			comment.nick = $('#user_nick').val();
 			data.push(comment);
-			data = JSON.stringify(data);
+			data = encodeURI(JSON.stringify(data));
 			var articleId = $('#article_id').attr('article_id');
-			
+
 			push_comment(articleId , data);
 
-		});		
+		});
 	}
 
 	var category_search = function(categoryId , page){
@@ -114,7 +110,7 @@ define(function(require , exports , module) {
 				console.log('error');
 			});
 	}
-	
+
 	var key_search = function(content , page){
 		$.ajax({
 				url			: '/comment/search_comment?content='+content+'&page='+page,
@@ -125,7 +121,7 @@ define(function(require , exports , module) {
 				$('#comment_list').html('')
 				$('#comment_list').html(data);
 				$('.page').attr('search' , content).attr('type' , 'key');
-			
+
 			})
 			.fail(function(){
 				console.log('error');
@@ -144,13 +140,13 @@ define(function(require , exports , module) {
 			$('body').append(data);
 		})
 		.fail(function(data){
-			console.log(data);
+            console.log('error');
 		});
 	}
-	
+
 	$('#next_page').bind('click' , function(){
 		var _this = this;
-		var type = $(_this).attr('type');		
+		var type = $(_this).attr('type');
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
 		if(type == 'key'){
@@ -164,7 +160,7 @@ define(function(require , exports , module) {
 	});
 	$('#pre_page').bind('click' , function(){
 		var _this = this;
-		var type = $(_this).attr('type');		
+		var type = $(_this).attr('type');
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
 		if(type == 'key'){
@@ -179,7 +175,7 @@ define(function(require , exports , module) {
 			$(_this).attr('page' , parseInt(Number(page) - 1));
 		}
 	});
-	
+
 	$('body').on('click' , '.close' , function(){
 		$('.modal').hide()
 	});
