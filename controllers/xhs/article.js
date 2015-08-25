@@ -75,5 +75,30 @@ router.get('/jixiao', function(req, res, next) {
 
 
 
+/*文章管理*/
+router.get('/adminUserList', function(req, res, next) {
+	var baseRequest = remoteRequest(req , res);
+	var url = '/getAllAdminUserList';
+	var data = {
+		// userId		:"1",
+		// addDate		:"2015-08-19",
+		// pageIndex	:"0",
+		// pageCount	:"50"
+	};
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		console.log(jsonStr);
+		// res.end();
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.render('xhs/article/adminUserList' , jsonStr);
+		}else{
+			res.redirect('/login');
+		}
+	});	
+});
+
+
+
+
 
 module.exports = router;

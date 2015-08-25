@@ -174,23 +174,30 @@
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
+                <form action="" class="form-horizontal clearfix"  role="form" style="width: 96%;margin: 0 auto;margin-bottom: 11px;">
 
-                 <div class="col-lg-1 col-md-1 col-xs-1" style="float:right;margin-right:40px;">
-                 <select id="questionBank" name="questionBank" class="form-control">
-                    选择昵称: <option value="">请选择昵称</option>
-                      <% if(result.length){ %>
-                         <% result.forEach(function(obj){%>
-                    <option value="<%= obj.userId%>"><%= obj.userNickName%></option>
-                       <%})%>
-                     <%}%>  
-                </select>
-                </div>
+                    <div class="pull-right">
+                            <button class="btn btn-danger" type="button">提交</button>
+                    </div>
+
+                    <div class="col-lg-2 col-md-12 col-xs-2 input-append date dpYears" style="float:right;margin-right:40px;">
+                        <input class="form-control form-control-inline input-append date dpYears form_date" data-date-format="yyyy-mm-dd" data-date="2015-05-16"  size="16" type="text" value="请选择时间"  readonly/>
+                    </div>
 
 
+                    <div class="col-lg-1 col-md-1 col-xs-1" style="float:right;margin-right:40px;">
+                    <select id="questionBank" name="questionBank" class="form-control">
+                        选择昵称: <option value="">请选择昵称</option>
+                          <% if(result.length){ %>
+                             <% result.forEach(function(obj){%>
+                        <option value="<%= obj.userId%>"><%= obj.userNickName%></option>
+                           <%})%>
+                         <%}%>  
+                    </select>
+                    </div>
 
-                 <div class="col-lg-2 col-md-12 col-xs-2" style="float:right;margin-right:40px;" > 
-                    <input class="form-control form-control-inline input-medium default-date-picker form_date"  size="16" type="text" value="请选择时间"/>
-                </div>
+
+                </form>
 
                 <!--  <div class="form-group" style="margin-left:10px;">
                     <div class="col-md-3 col-xs-11">
@@ -202,7 +209,6 @@
                         </div>
                     </div>
                 </div> -->
-                    
             </div>
 
             <!--列表页面-->
@@ -276,6 +282,7 @@
 <script type="text/javascript">
     $('.form_date').datetimepicker({
         language:  'fr',
+        format:'yyyy-mm-dd',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,
@@ -284,6 +291,18 @@
         minView: 2,
         forceParse: 0
     });
+
+     /*
+        language：语言，默认英语
+        weekStart：每周开始从那天开始显示（值：1-7）
+        todayBtn：单独显示当天的时间点（值：0，1）
+        autoclose：选择完时间是否自动关闭时间框(值：0，1)
+        todayHighlight：当天的日期是否高亮显示(值：0，1)
+        startView：选择时间框默认显示的时间格式，2：天显示。（值：1，2，3。。）
+        minView=2：选择时间到天数为止
+        pickerPosition:控件显示位置，默认居右
+        format:时间格式
+     */
 
 
     // $(document).click('.form_date',function(){
