@@ -50,16 +50,31 @@ router.get('/article_list' , function(req , res , next) {
 });
 
 
+
+
 /*文章管理*/
 router.get('/jixiao', function(req, res, next) {
 	var baseRequest = remoteRequest(req , res);
+	var info = req.query;
+	console.log(info.nickName);
+	// res.end();
 	var url = '/selectCommentJnl';
-	var data = {
-		userId		:"1",
-		addDate		:"2015-08-19",
-		pageIndex	:"0",
-		pageCount	:"50"
-	};
+	if(info.nickName=="0"){
+		var data = {
+			userId		:"1",
+			addDate		:"2015-08-21",
+			pageIndex	:"0",
+			pageCount	:"50"
+		};
+	}else{
+		var data = {
+			userId		:info.nickName,
+			addDate		:info.createTime,
+			pageIndex	:"0",
+			pageCount	:"50"
+		};
+	}
+	
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
 		console.log(jsonStr);
@@ -68,6 +83,7 @@ router.get('/jixiao', function(req, res, next) {
 			res.render('xhs/article/jixiao' , jsonStr);
 		}else{
 			res.redirect('/login');
+			// var json = JSON.stringify();
 		}
 	});	
 });
