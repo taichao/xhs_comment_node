@@ -39,8 +39,11 @@ router.get('/article_list' , function(req , res , next) {
         publisDate:moment().format('YYYY-MM-DD')
     };
 
+	console.log(data);
+
     baseRequest.post(url , data , function(err , response , body){
         var jsonStr = JSON.parse(body);
+		console.log(jsonStr);
 		jsonStr.day = data.publisDate;
         if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
             res.render('xhs/article/articleManage_list' , jsonStr);
