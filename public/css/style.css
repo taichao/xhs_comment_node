@@ -169,6 +169,7 @@ a, a:hover, a:focus {
     height: 100%;
     position: fixed;
     background: #2a3542;
+    z-index:1;
 }
 
 #sidebar ul li {
@@ -327,6 +328,7 @@ ul.sidebar-menu li a.active i {
 
 #main-content {
     margin-left: 210px;
+    margin-bottom:50px;
 }
 
 .header, .footer {
@@ -4614,6 +4616,10 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     background: #5b6e84;
     color: #fff;
     padding: 10px 0;
+    position:fixed;
+    width:100%;
+    bottom:0;
+    z-index:0;
 }
 
 .go-top {

@@ -1,151 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    {_with:false}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="新华社评论管理系统">
-    <meta name="author" content="shinc">
-    <meta name="keyword" content="shinc edu online">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="新华社评论管理系统">
+        <meta name="author" content="shinc">
+        <meta name="keyword" content="shinc edu online">
+        <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>新华社评论管理系统</title>
+        <title>新华社评论管理系统</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-reset.css" rel="stylesheet">
-    <!--external css-->
-    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/style-responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/assets/jquery-multi-select/css/multi-select.css" />
-	<link rel="stylesheet" type="text/css" href="/assets/gritter/css/jquery.gritter.css">
-    <link rel="stylesheet" href="/css/xhs_pinglun/list.css"/>
-    <link rel="stylesheet" href="/css/xhs_pinglun/pinglun.css"/>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-      <script src="/js/respond.min.js"></script>
-    <![endif]-->
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/bootstrap-reset.css" rel="stylesheet">
+        <!--external css-->
+        <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
-	<script src="/js/sea-modules/seajs/seajs/2.2.0/sea.js"></script>
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-fileupload/bootstrap-fileupload.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-datepicker/css/datepicker.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-timepicker/compiled/timepicker.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-colorpicker/css/colorpicker.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-datetimepicker/css/datetimepicker.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/jquery-multi-select/css/multi-select.css" />
 
-	<script>
-		seajs.config({
+        <!-- Custom styles for this template -->
+        <link href="/css/style.css" rel="stylesheet">
+        <link href="/css/style-responsive.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="/assets/jquery-multi-select/css/multi-select.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/gritter/css/jquery.gritter.css">
+        <link rel="stylesheet" href="/css/xhs_pinglun/list.css"/>
+        <link rel="stylesheet" href="/css/xhs_pinglun/pinglun.css"/>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+        <!--[if lt IE 9]>
+            <script src="/js/html5shiv.js"></script>
+            <script src="/js/respond.min.js"></script>
+            <![endif]-->
 
-			base:"/js/",
-			alias:{
-				'jquery':"sea-modules/jquery/jquery/1.10.1/jquery-debug.js"
-			}
-		});
-	</script>
+            <script src="/js/sea-modules/seajs/seajs/2.2.0/sea.js"></script>
 
-	
+            <script>
+seajs.config({
 
-  </head>
-
-  <body>
-  <section id="container" class="">
-		<!--header start-->
-		<header class="header white-bg">
-		<div class="sidebar-toggle-box">
-			<div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
-		</div>
-		<!--logo start-->
-		<a href="index.html" class="logo" >新华社评论管理系统</a>
-		<!--logo end-->
-		<div class="top-nav ">
-			<!--search & user info start-->
-			<ul class="nav pull-right top-menu">
-				<li>
-				<!-- <input type="text" class="form-control search" placeholder="Search"> -->
-				</li>
-				<!-- user login dropdown start-->
-				<li class="dropdown">
-				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-					<img alt="" src="../img/avatar1_small.jpg">
-					<span class="username">
-						<%if(userInfo != null ){%>
-							<%= userInfo.userName %>
-						<% } %>
-					</span>
-					<b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu extended logout">
-					<div class="log-arrow-up"></div>
-					<!-- <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
-					<li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-					<li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li> -->
-					<li><a href="/logout"><i class="icon-key"></i>退出登录</a></li>
-				</ul>
-				</li>
-				<!-- user login dropdown end -->
-			</ul>
-			<!--search & user info end-->
-		</div>
-		</header>
-		<!--header end-->
+    base:"/js/",
+    alias:{
+        'jquery':"sea-modules/jquery/jquery/1.10.1/jquery-debug.js"
+    }
+});
+            </script>
 
 
-		<!--sidebar start-->
-		<aside>
-		<div id="sidebar"  class="nav-collapse ">
-			<!-- sidebar menu start-->
-			<ul class="sidebar-menu" id="nav-accordion">
-				
-				<!-- menu begin-->
-				<%	if(typeof(userInfo) != 'undefined' && userInfo != null) { %>
 
-				<%
-					var menuMap = userInfo.menuMap;
-					if(Object.prototype.toString.call(menuMap) === '[object Array]') {
-				%>
+    </head>
 
-				<% menuMap.forEach(function(item){  %>
-					<li class="sub-menu">
-						<%	if(item.url == 'none'){   %>
-								<a href="javascript:;">
-						<%	} else {  %> 
-								<a href="<%=item.url%>">
-						<%	}	%>
-								<%	if(item.tag == 'videoManage') {%>
-										<i class="icon-laptop"></i>
-								<%	} %>
-								<%	if(item.tag == 'knowledgeManage') {%>
-										<i class="icon-book"></i>
-								<%	} %>
-								<%	if(item.tag == 'infoManage') {%>
-										<i class="icon-th"></i>
-								<%	} %>
-								<%	if(item.tag == 'adminUserManage') {%>
-										<i class="icon-user"></i>
-								<%	} %>
-								<span><%=	item.title	%></span>
-								</a>
-						<%	if(item.sub != null){ 	%>	
-								<ul class="sub">
-								<% item.sub.forEach(function(item2){  %>
-									<li>
-										<a href="<%=item2.url%>">
-											<%=item2.title%>
-										</a>	
-									</li>	
-								<% }); %>
-								</ul>
-						<%	}	%>
-					</li>
-				<% }); %>
+    <body>
+        <section id="container" class="">
+            <!--header start-->
+            <header class="header white-bg">
+                <div class="sidebar-toggle-box">
+                    <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+                </div>
+                <!--logo start-->
+                <a href="index.html" class="logo" >新华社评论管理系统</a>
+                <!--logo end-->
+                <div class="top-nav ">
+                    <!--search & user info start-->
+                    <ul class="nav pull-right top-menu">
+                        <li>
+                            <!-- <input type="text" class="form-control search" placeholder="Search"> -->
+                        </li>
+                        <!-- user login dropdown start-->
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <img alt="" src="../img/avatar1_small.jpg">
+                                <span class="username">
+                                    <%if(userInfo != null ){%>
+                                    <%= userInfo.userName %>
+                                    <% } %>
+                                </span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu extended logout">
+                                <div class="log-arrow-up"></div>
+                                <!-- <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                                    <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+                                    <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li> -->
+                                    <li><a href="/logout"><i class="icon-key"></i>退出登录</a></li>
+                            </ul>
+                        </li>
+                        <!-- user login dropdown end -->
+                    </ul>
+                    <!--search & user info end-->
+                </div>
+            </header>
+            <!--header end-->
 
-				<%}%>
 
-				<%	}	%>
-				<!-- menu end-->
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu" id="nav-accordion">
 
-			</ul>
-			<!-- sidebar menu end-->
-			
-		
-		</div>
-		</aside>
-		<!--sidebar end-->
+                        <!-- menu begin-->
+                        <%	if(typeof(userInfo) != 'undefined' && userInfo != null) { %>
+
+                        <%
+                         var menuMap = userInfo.menuMap;
+                         if(Object.prototype.toString.call(menuMap) === '[object Array]') {
+                         %>
+
+                         <% menuMap.forEach(function(item){  %>
+                         <li class="sub-menu">
+                            <%	if(item.url == 'none'){   %>
+                             <a href="javascript:;">
+                            <%	} else {  %>
+                                 <a href="<%=item.url%>">
+                            <%	} %>
+                            <%if(item.tag == 'videoManage') {%>
+                                <i class="icon-laptop"></i>
+                            <%	}else if(item.tag == 'knowledgeManage') {%>
+                                <i class="icon-book"></i>
+                            <%	}else if(item.tag == 'infoManage') {%>
+                                <i class="icon-th"></i>
+                            <%	}else if(item.tag == 'adminUserManage') {%>
+                                <i class="icon-user"></i>
+                            <%	}else{ %>
+                                <i class="icon-th"></i>
+                            <% } %>
+                                <span><%=	item.title	%></span>
+                            </a>
+                             <%	if(item.sub != null){ 	%>	
+                             <ul class="sub">
+                                 <% item.sub.forEach(function(item2){  %>
+                                 <li>
+                                     <a href="<%=item2.url%>">
+                                         <%=item2.title%>
+                                     </a>	
+                                 </li>	
+                                 <% }); %>
+                             </ul>
+                             <%	}	%>
+                         </li>
+                         <% }); %>
+
+                         <%}%>
+
+                        <%	}	%>
+                        <!-- menu end-->
+
+                    </ul>
+                    <!-- sidebar menu end-->
+
+
+                </div>
+            </aside>
+            <!--sidebar end-->

@@ -4,19 +4,20 @@
  * Module dependencies.
  */
 
-var app		= require('../app'),
-	debug	= require('debug')('xhs_comment_node:server'),
-	http	= require('http'),
-	fs = require("fs"),
-	config	= require('../config/config.json');
-	cluster = require('cluster');
-	numCPUs = require('os').cpus().length;
-	numCPUs = 1;
+var app     = require(__dirname + '/../app'),
+    debug   = require('debug')('xhs_comment_node:server'),
+    http    = require('http'),
+    fs      = require("fs"),
+    config  = require(__dirname + '/../config/config.json'),
+    cluster = require('cluster'),
+    numCPUs = require('os').cpus().length,
+    numCPUs = 1;
 
 /**
  * Get port from environment and store in Express.
  */
 
+console.log(__dirname);
 var port = normalizePort(config.port);
 
 app.set('port', port);
@@ -25,27 +26,27 @@ app.set('port', port);
  * Create HTTP server.
  */
 if (cluster.isMaster) {
-	for (var i = 0; i < numCPUs; i++) {
-		cluster.fork();
-	}
+    for (var i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
 
-	cluster.on('death', function(worker) {
-		console.log('worker ' + worker.pid + ' died');
-		cluster.fork();
-	});
-	cluster.on('exit', function(worker) {
-		console.log('worker ' + worker.process.pid + ' died');
-		cluster.fork();
-	});
+    cluster.on('death', function(worker) {
+        console.log('worker ' + worker.pid + ' died');
+        cluster.fork();
+    });
+    cluster.on('exit', function(worker) {
+        console.log('worker ' + worker.process.pid + ' died');
+        cluster.fork();
+    });
 } else {
 
-	var server = http.createServer(app);
-	
-	server.listen(port);
-	server.on('error', onError);
-	server.on('listening', onListening);
+    var server = http.createServer(app);
 
-	console.log("Server has started.");
+    server.listen(port);
+    server.on('error', onError);
+    server.on('listening', onListening);
+
+    console.log("Server has started.");
 }
 
 /**
@@ -58,19 +59,19 @@ if (cluster.isMaster) {
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
 
-  return false;
+    return false;
 }
 
 /**
@@ -78,27 +79,27 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+    var bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+        // handle specific listen errors with friendly messages
+        switch (error.code) {
+            case 'EACCES':
+                console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+            case 'EADDRINUSE':
+                console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+            default:
+                throw error;
+        }
 }
 
 /**
@@ -106,17 +107,17 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+        debug('Listening on ' + bind);
 }
 
 fs.createWriteStream("../logs/pids", {
-	flags: "w",
-	encoding: "utf-8",
-	mode: 0666
+    flags: "w",
+    encoding: "utf-8",
+    mode: 0666
 }).write(process.pid + "\n");
 
 

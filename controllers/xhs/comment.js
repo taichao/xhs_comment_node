@@ -20,7 +20,7 @@ router.get('/release_comment_list', function(req, res, next) {
 			jsonStr.title = data.title;
 			jsonStr.id = data.id;
 			if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
-				res.render('xhs/comment/release_comment_list' , jsonStr);  	
+				res.render('xhs/comment/release_comment_list' , jsonStr);
 			}else{
 				res.redirect('/login');
 			}
@@ -31,7 +31,7 @@ router.get('/release_comment_list', function(req, res, next) {
 
 router.get('/comment', function(req, res, next) {
 
-	res.render('xhs/comment/comment');  	
+	res.render('xhs/comment/comment');
 });
 
 //获取评论的分类
@@ -49,7 +49,7 @@ router.get('/comment_category' , function(req , res , next){
 		}else{
 			res.redirect('/login');
 		}
-	});	
+	});
 });
 
 
@@ -108,6 +108,7 @@ router.get('/push_comment' , function(req , res , next){
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
+        console.log(jsonStr);
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			var data = {
 				'title' : "评论",
