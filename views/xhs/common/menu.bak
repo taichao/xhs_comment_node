@@ -1,0 +1,47 @@
+<!-- menu begin-->
+			<%	if(typeof(userInfo) != 'undefined') { %>
+
+			<%
+                var menuMap = userInfo.menuMap;
+                if(Object.prototype.toString.call(menuMap) === '[object Array]') {
+            %>
+
+            <% menuMap.forEach(function(item){  %>
+	            <li class="sub-menu">
+	                <%	if(item.url == 'none'){   %>
+							<a href="javascript:;">
+	                <%	} else {  %> 
+							<a href="<%=item.url%>">
+	                <%	}	%>
+	                		<%	if(item.tag == 'videoManage') {%>
+									<i class="icon-laptop"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'knowledgeManage') {%>
+									<i class="icon-book"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'infoManage') {%>
+									<i class="icon-th"></i>
+	                		<%	} %>
+	                		<%	if(item.tag == 'adminUserManage') {%>
+									<i class="icon-user"></i>
+	                		<%	} %>
+							<span><%=	item.title	%></span>
+							</a>
+					<%	if(item.sub != null){ 	%>	
+							<ul class="sub">
+							<% item.sub.forEach(function(item2){  %>
+								<li>
+									<a href="<%=item2.url%>">
+										<%=item2.title%>
+									</a>	
+								</li>	
+							<% }); %>
+							</ul>
+					<%	}	%>
+	            </li>
+            <% }); %>
+
+            <%}%>
+
+            <%	}	%>
+            <!-- menu end-->

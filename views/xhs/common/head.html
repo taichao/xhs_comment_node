@@ -41,13 +41,13 @@
             <script src="/js/sea-modules/seajs/seajs/2.2.0/sea.js"></script>
 
             <script>
-seajs.config({
+            seajs.config({
 
-    base:"/js/",
-    alias:{
-        'jquery':"sea-modules/jquery/jquery/1.10.1/jquery-debug.js"
-    }
-});
+                base:"/js/",
+                alias:{
+                    'jquery':"sea-modules/jquery/jquery/1.10.1/jquery-debug.js"
+                }
+            });
             </script>
 
 
@@ -97,63 +97,4 @@ seajs.config({
             <!--header end-->
 
 
-            <!--sidebar start-->
-            <aside>
-                <div id="sidebar"  class="nav-collapse ">
-                    <!-- sidebar menu start-->
-                    <ul class="sidebar-menu" id="nav-accordion">
-
-                        <!-- menu begin-->
-                        <%	if(typeof(userInfo) != 'undefined' && userInfo != null) { %>
-
-                        <%
-                         var menuMap = userInfo.menuMap;
-                         if(Object.prototype.toString.call(menuMap) === '[object Array]') {
-                         %>
-
-                         <% menuMap.forEach(function(item){  %>
-                         <li class="sub-menu">
-                            <%	if(item.url == 'none'){   %>
-                             <a href="javascript:;">
-                            <%	} else {  %>
-                                 <a href="<%=item.url%>">
-                            <%	} %>
-                            <%if(item.tag == 'videoManage') {%>
-                                <i class="icon-laptop"></i>
-                            <%	}else if(item.tag == 'knowledgeManage') {%>
-                                <i class="icon-book"></i>
-                            <%	}else if(item.tag == 'infoManage') {%>
-                                <i class="icon-th"></i>
-                            <%	}else if(item.tag == 'adminUserManage') {%>
-                                <i class="icon-user"></i>
-                            <%	}else{ %>
-                                <i class="icon-th"></i>
-                            <% } %>
-                                <span><%=	item.title	%></span>
-                            </a>
-                             <%	if(item.sub != null){ 	%>	
-                             <ul class="sub">
-                                 <% item.sub.forEach(function(item2){  %>
-                                 <li>
-                                     <a href="<%=item2.url%>">
-                                         <%=item2.title%>
-                                     </a>	
-                                 </li>	
-                                 <% }); %>
-                             </ul>
-                             <%	}	%>
-                         </li>
-                         <% }); %>
-
-                         <%}%>
-
-                        <%	}	%>
-                        <!-- menu end-->
-
-                    </ul>
-                    <!-- sidebar menu end-->
-
-
-                </div>
-            </aside>
-            <!--sidebar end-->
+            <% include menu.html %>

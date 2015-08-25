@@ -1,113 +1,52 @@
-		
-		<!--sidebar start-->
-		<aside>
-		<div id="sidebar"  class="nav-collapse ">
-			<!-- sidebar menu start-->
-			<ul class="sidebar-menu" id="nav-accordion">
-				<!-- <li>
-				<a class="active" href="/">
-					<i class="icon-dashboard"></i>
-					<span>Dashboard</span>
-				</a>
-				</li>
 
-				<li class="sub-menu">
-				<a href="javascript:;" >
-					<i class="icon-laptop"></i>
-					<span>题目类视频管理</span>
-				</a>
-				<ul class="sub">
-					<li><a  href="/video/pastpaperList">真题/模拟题库管理</a></li>
-					<li><a  href="/video/selfVideoList">自编/改编题库管理</a></li>
-					<li><a  href="/video/topicStructure">真题/模拟题库结构</a></li>
-				</ul>
-				</li>
+<!--sidebar start-->
+<aside>
+    <div id="sidebar"  class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            <li>
+                <a class="active" href="/index">
+                    <i class="icon-dashboard"></i>
+                    <span>发布管理</span>
+                </a>
+            </li>
 
-				<li class="sub-menu">
-				<a href="javascript:;" >
-					<i class="icon-book"></i>
-					<span>知识点类视频管理</span>
-				</a>
-				<ul class="sub">
-					<li><a  href="/knowledge/knowledgeVideo">知识点视频管理</a></li>
-					<li><a  href="/knowledge/knowledgeStructure">知识点结构管理</a></li>
-				</ul>
-				</li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-laptop"></i>
+                    <span>通用评论管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/common_comment/common_comment_list">添加通用评论</a></li>
+                    <!--<li><a  href="/video/selfVideoList">添加分类</a></li>-->
+                </ul>
+            </li>
 
-				<li class="sub-menu">
-				<a href="javascript:;" >
-					<i class="icon-cogs"></i>
-					<span>信息管理</span>
-				</a>
-				<ul class="sub">
-					<li><a  href="/keyword/keywordTag">关键字标签管理</a></li>
-					<li><a  href="/knowledge/knowledgeList">知识点管理</a></li>
-					<li><a  href="/lecture/lectureList">讲解人管理</a></li>
-				</ul>
-				</li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-book"></i>
+                    <span>统计</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/article/article_list">每天发送的文章</a></li>
+                    <li><a  href="/article/jixiao">已发布的评论</a></li>
+                </ul>
+            </li>
 
-				<li class="sub-menu">
-				<a href="javascript:;" >
-					<i class="icon-tasks"></i>
-					<span>教师管理</span>
-				</a>
-				<ul class="sub">
-					<li><a  href="/user/userList">教师管理</a></li>
-				</ul>
-				</li> -->
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-user"></i>
+                    <span>管理员管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/user/userList">用户管理</a></li>
+                </ul>
+            </li>
 
-			<!-- menu begin-->
-			<%	if(typeof(userInfo) != 'undefined') { %>
+        </ul>
+        <!-- sidebar menu end-->
 
-			<%
-                var menuMap = userInfo.menuMap;
-                if(Object.prototype.toString.call(menuMap) === '[object Array]') {
-            %>
 
-            <% menuMap.forEach(function(item){  %>
-	            <li class="sub-menu">
-	                <%	if(item.url == 'none'){   %>
-							<a href="javascript:;">
-	                <%	} else {  %> 
-							<a href="<%=item.url%>">
-	                <%	}	%>
-	                		<%	if(item.tag == 'videoManage') {%>
-									<i class="icon-laptop"></i>
-	                		<%	} %>
-	                		<%	if(item.tag == 'knowledgeManage') {%>
-									<i class="icon-book"></i>
-	                		<%	} %>
-	                		<%	if(item.tag == 'infoManage') {%>
-									<i class="icon-th"></i>
-	                		<%	} %>
-	                		<%	if(item.tag == 'adminUserManage') {%>
-									<i class="icon-user"></i>
-	                		<%	} %>
-							<span><%=	item.title	%></span>
-							</a>
-					<%	if(item.sub != null){ 	%>	
-							<ul class="sub">
-							<% item.sub.forEach(function(item2){  %>
-								<li>
-									<a href="<%=item2.url%>">
-										<%=item2.title%>
-									</a>	
-								</li>	
-							<% }); %>
-							</ul>
-					<%	}	%>
-	            </li>
-            <% }); %>
-
-            <%}%>
-
-            <%	}	%>
-            <!-- menu end-->
-
-			</ul>
-			<!-- sidebar menu end-->
-			
-		
-		</div>
-		</aside>
-		<!--sidebar end-->
+    </div>
+</aside>
+<!--sidebar end-->
