@@ -11,23 +11,24 @@
                 </ul>
                 <!--breadcrumbs end -->
             </div>
-            <form action="" class="form-horizontal clearfix"  role="form" style="width: 96%;margin: 0 auto;margin-bottom: 11px;">
 
-                <div class="pull-right">
-                    <button class="btn btn-danger" type="button">提交</button>
+            <form action="" class="form-horizontal clearfix formAction"  role="form" style="width: 96%;margin: 0 auto;margin-bottom: 11px;">
+
+                <div class="pull-right"> 
+                    <button class="btn btn-danger submit_action" type="button" >提交</button>
                 </div>
 
-                <div class="col-lg-2 col-md-12 col-xs-2 input-append date dpYears" style="float:right;margin-right:40px;">
-                    <input class="form-control form-control-inline input-append date dpYears form_date" data-date-format="yyyy-mm-dd" data-date="2015-05-16"  size="16" type="text" value="请选择时间"  readonly/>
+                <div class="input-append date dpYears pull-right" style="width:200px;">
+					<input class="form-control form-control-inline input-append date dpYears form_date" data-date-format="yyyy-mm-dd" data-date="<%= day %>"  size="16" type="text" value="<%= day %>"   readonly/>
                 </div>
 
 
-                <div class="col-lg-1 col-md-1 col-xs-1" style="float:right;margin-right:40px;">
-                    <select id="questionBank" name="questionBank" class="form-control">
-                        选择昵称: <option value="">请选择昵称</option>
-                        <% if(result.length){ %>
-                        <% result.forEach(function(obj){%>
-                        <option value="<%= obj.userId%>"><%= obj.userNickName%></option>
+                <div class="pull-right" style="width: 200px;">
+                    <select id="questionBank" name="questionBank" class="form-control AdminId">
+                        选择昵称: <option value="0">请选择昵称</option>
+                        <% if(userList.result.length){ %>
+                        <% userList.result.forEach(function(obj){%>
+                        <option value="<%= obj.id%>"><%= obj.nickname%></option>
                         <%})%>
                         <%}%>  
                     </select>
@@ -62,13 +63,13 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="jixiao">
 
 
 
 
-                        <% if(result.length){ %>
-                        <% result.forEach(function(obj){%>
+                        <% if(commentList.result.length){ %>
+                        <% commentList.result.forEach(function(obj){%>
                         <tr>
                             <td><a href="#"><%= obj.articleId%></a></td>
                             <td class="hidden-phone"><%= obj.userNickName%></td>
@@ -111,7 +112,6 @@
 <script type="text/javascript" src="/assets/bootstrap-datetimepicker/sample/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/assets/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript">
 $('.form_date').datetimepicker({
     language:  'fr',
@@ -125,6 +125,25 @@ $('.form_date').datetimepicker({
     forceParse: 0
 });
 
+
+
+$('.submit_action').click(function (){
+    var nickName = $('.AdminId').val();
+    var createTime = $('.form_date').val();
+    if(nickName == "0" && createTime =="请选择时间"){
+        alert("请选择时间和昵称");
+        return;
+    }
+    $.post('/article/jixiao', {nickName: nickName,createTime: createTime}, function(data) {
+		console.log(data);
+        $('#jixiao').html('');
+        $('#jixiao').html(data);
+    });
+});
+
+
+
+
 /*
    language：语言，默认英语
    weekStart：每周开始从那天开始显示（值：1-7）
@@ -137,12 +156,5 @@ $('.form_date').datetimepicker({
    format:时间格式
  */
 
-
-// $(document).click('.form_date',function(){
-//     var values = $('.form_date').val();
-//     if(values !="请选择时间"){
-//         alert(values);
-//     }
-// });
 </script>
 <%include ../common/foot.html%>

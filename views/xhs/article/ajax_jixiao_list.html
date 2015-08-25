@@ -1,0 +1,16 @@
+<% if(result.length){ %>
+<% result.forEach(function(obj){%>
+<tr>
+	<td><a href="#"><%= obj.articleId%></a></td>
+	<td class="hidden-phone"><%= obj.userNickName%></td>
+	<td><%= obj.title%></td>
+	<td><%= obj.addDate%></td>
+	<td><span class="label label-info label-mini"><%= obj.content%></span></td>
+	<td>
+		<button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
+		<button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+		<button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
+	</td>
+</tr>
+<%})%>
+<%}%>
