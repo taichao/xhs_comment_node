@@ -4177,8 +4177,9 @@ td.details table tr td, .dataTable tr:last-child {
 .adv-table .dataTables_filter label input {
     float: right;
     margin-left: 10px;
-    width: 78%;
+    width: 74%;
 }
+
 
 .adv-table .dataTables_filter label {
     line-height: 33px;
@@ -4196,6 +4197,10 @@ td.details table tr td, .dataTable tr:last-child {
     padding: 15px;
 }
 
+.dataTables_length {
+	width:300px;
+	float:left;
+}
 .adv-table .dataTables_length,.adv-table .dataTables_filter {
     padding: 15px 0;
 }
