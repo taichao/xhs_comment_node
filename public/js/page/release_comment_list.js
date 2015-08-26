@@ -87,7 +87,7 @@ define(function(require , exports , module) {
 			comment.comment = $('#user_comment').val();
 			comment.nick = $('#user_nick').val();
 			data.push(comment);
-			data = encodeURI(JSON.stringify(data));
+			data = JSON.stringify(data);
 			var articleId = $('#article_id').attr('article_id');
 
 			push_comment(articleId , data);
@@ -130,8 +130,12 @@ define(function(require , exports , module) {
 
 	var push_comment = function(articleId , data){
 		$.ajax({
-		  url			: '/comment/push_comment?articleId='+articleId+'&commentList='+data,
-		  type		: 'GET',
+		  url		: '/comment/push_comment',
+		  type		: 'POST',
+		  data		: {
+				articleId:articleId,
+				commentList:data
+		  },
 		  dataType	: 'html'
 		})
 		.done(function(data){

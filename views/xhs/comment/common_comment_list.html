@@ -110,8 +110,12 @@
 		data = JSON.stringify(data);
 
 		$.ajax({
-			url			: '/common_comment/add_comment?categoryId='+categoryId+'&commentList='+data,
-			type		: 'GET',
+			url			: '/common_comment/add_comment',
+			type		: 'POST',
+			data		: {
+				categoryId:categoryId,
+				commentList:data
+			},
 			dataType	: 'json'
 		}).done(function(data){
 			$('body').append(data);

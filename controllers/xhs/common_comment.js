@@ -28,7 +28,7 @@ router.get('/common_comment_list' , function(req , res , next){
 
 
 //添加评论
-router.get('/add_comment' , function(req , res , next){
+router.post('/add_comment' , function(req , res , next){
 	var baseRequest = remoteRequest(req , res);
 
 	var url = '/basecomment/addComment';

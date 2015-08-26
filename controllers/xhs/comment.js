@@ -97,7 +97,7 @@ router.get('/category_comment' , function(req , res , next){
 });
 
 //向新华社推送评论
-router.get('/push_comment' , function(req , res , next){
+router.post('/push_comment' , function(req , res , next){
 	var baseRequest = remoteRequest(req , res);
 
 	var url = '/basecomment/commentIt';
