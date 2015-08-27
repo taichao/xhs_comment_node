@@ -18,34 +18,43 @@
 	<section class="panel">
 	<div class="innertop">
 		<div class="inner" style="border-right:1px solid #ccc">
-			<div class="innerbox" style="width:100%;
-			height:50px;margin-bottom:20px;">
-				<span style="display:block;width:30%;height:50px;line-height:50px;float:left;">请选择分类</span>
-                <!--<div class="add" style="border:1px solid blue;float:right;width:65%;height:50px;">-->
-
-				<!--</div>-->
+			<div class="innerbox" style="width:100%;height:50px;margin-top:10px;">
+				<button type="button" class="add-frist-category btn btn-shadow btn-success col-sm-3"><i class="icon-plus"></i></button>
 			</div>
 
-			<% if( result ) { %>
+			<% if( result ){%>
+			<div class="panel-group m-bot20" id="accordion">
 				<% result.forEach(function(category){%>
-					<div class="category" category_id="<%= category.id %>" id="<%= category.id %>"><%= category.item.name %></div>
-					<% if( category.child ){ %>
+				<div class="panel panel-default">
+					<div style="background-color:#ccc;" class="panel-heading">
+						<a class="xhs-category-list-a accordion-toggle <%if(open!=category.id){%>collapsed<%}%>" data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= category.id %>">
+							<%= category.item.name %>
+						</a>
+					</div>
+					
+					<div id="collapse_<%= category.id %>" class="panel-collapse <%if(open!=category.id){%>collapse<%}else{%>in<%}%>" style="height: 0px;">
+						<% if( category.child ){ %>
 						<% category.child.forEach(function(child){%>
-							<div style="margin-left:100px;" class="category" category_id="<%= child.id %>" id="child_<%= category.id %>"><%= child.item.name %></div>
-
+						<div style="cursor:pointer" class="panel-body category" id="<%= child.id %>" category_id="<%= category.id %>">
+							<%= child.item.name %>
+						</div>
 						<%});%>
+<<<<<<< HEAD
 
 
 			        <div style="height:50px;margin-left:100px;">
 						<button type="submit" class="btn btn-danger add_comment" style="margin-top:5px;">添加    </button>
+=======
+						<div class="col-sm-3 panel-body add_child_category" category_id="<%= category.id %>" style="width:100%;cursor:pointer;" >
+							<i class="icon-plus"></i>
+						</div>
+						<% } %>
+>>>>>>> 627d6c1fe06d511be83d707e37956225571f203a
 					</div>
-
-					<% } %>
-
+				</div>
 				<%});%>
-
-			<button type="submit" class="btn btn-danger add_comment" style="margin-top:5px;">添加</button>
-			<% } %>
+			</div>
+			<% }%>
 		</div>
 		<div class="inner" style="height:100%;margin-left:10px;">
 			<div class="one">
@@ -69,33 +78,7 @@
 			<div class="one">
 				<button type="submit" class="btn btn-danger add_comment">添加通用评论</button>
 			</div>
-			<!--
-			<div class="two">
-				<table class="table table-striped table-advance table-hover">
-					<thead>
-						<tr>
-							<th><i class="icon-bullhorn"></i>评论ID</th>
-							<th class="hidden-phone"><i class="icon-question-sign"></i>内容</th>
-							<th><i class="icon-bookmark"></i> 昵称</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><a href="#">Vector Ltd</a></td>
-							<td class="hidden-phone">Lorem Ipsum dorolo imit</td>
-							<td>12120.00$ </td>
-							<td>
-								<button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
-								<button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-								<button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
-							</td>
-						</tr>
-						
-					</tbody>
-				</table>
-			</div>
-			-->
+			
 		</div>
 	</div>
 
@@ -104,52 +87,45 @@
 </div>
 
 </section>
-
-</section>
 <!--main content end-->
+
+<div class="modal fade in add-category-dialog" style="display: block;display:none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close dialog_close">×</button>
+				<h4 class="modal-title">添加评论</h4>
+			</div>
+			<form action="/common_comment/add_category" method="post">
+			<div class="modal-body">
+				<div class="xhs-add-category">
+					<div class="xhs-add-category-tag" style="" >父级ID:</div>
+					<div class="col-sm-10" style="width:70%">
+						<input name="parent" id="add_category_id" readonly type="text" class="form-control" >
+					</div>
+				</div>
+				<div class="xhs-add-category" >
+					<div class="xhs-add-category-tag" >分类名称:</div>
+					<div class="col-sm-10" style="width:70%">
+						<input name="name" id="add_category_name" type="text" class="form-control" >
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="dialog_close btn btn-default" type="button">取消</button>
+				<button class="btn btn-success" type="submit">添加</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal-backdrop fade in add-category-layer" style="display:none"></div>
+<script>
+	seajs.use('page/common_comment_list' , function(obj){
+		obj();
+	});	
+</script>
 
 <%include ../common/foot.html%>
 
-<script>
-	$('.category').bind('click' , function(){
-		var categoryId = $(this).attr('category_id');
-		$('#input_category_id').val(categoryId);
-		$('#category_name').val($(this).html());
-	});
 
-	$('.add_comment').bind('click' , function(){
-		var data = [];
-		var comment = {};
-		var categoryId = $('#input_category_id').val();
-		comment.content	= $('#content').val();
-		data.push(comment);
-
-		data = JSON.stringify(data);
-
-		$.ajax({
-			url			: '/common_comment/add_comment',
-			type		: 'POST',
-			data		: {
-				categoryId:categoryId,
-				commentList:data
-			},
-			dataType	: 'json'
-		}).done(function(data){
-			$('body').append(data);
-		}).fail(function(data){
-			console.log(data);
-		});
-	});
-
-	$('body').on('click' , '.close' , function(){
-		$('.modal').hide()
-	});
-	$('body').on('click' , '.close_ok' , function(){
-		$('.modal').hide()
-	});
-</script>
-
-</section>
-
-</body>
-</html>

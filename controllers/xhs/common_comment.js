@@ -17,7 +17,7 @@ router.get('/common_comment_list' , function(req , res , next){
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		console.log(jsonStr);
+		jsonStr.open = jsonStr.result[0].id;
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			res.render('xhs/comment/common_comment_list' , jsonStr);
 		}else{
@@ -33,7 +33,7 @@ router.post('/add_comment' , function(req , res , next){
 
 	var url = '/basecomment/addComment';
 
-	var data = req.query;
+	var data = req.body;
 	data.commentList = JSON.parse(data.commentList);
 
 	baseRequest.post(url , data , function(err , response , body){
@@ -50,6 +50,26 @@ router.post('/add_comment' , function(req , res , next){
 			});
 		}
 	});
+});
+
+//添加评论
+router.post('/add_category' , function(req , res , next){
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/basecomment/addCategory';
+
+	var data = req.body;
+
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		jsonStr.open = data.parent;
+
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.redirect('/common_comment/common_comment_list');
+		}else{
+			res.redirect('/common_comment/common_comment_list');
+		}
+	});	
 });
 
 module.exports=router
