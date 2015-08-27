@@ -23,7 +23,7 @@ router.get('/common_comment_list' , function(req , res , next){
 		}else{
 			res.redirect('/login');
 		}
-	});	
+	});
 });
 
 
@@ -49,7 +49,7 @@ router.post('/add_comment' , function(req , res , next){
 				res.end(JSON.stringify(html))
 			});
 		}
-	});	
+	});
 });
 
 module.exports=router
