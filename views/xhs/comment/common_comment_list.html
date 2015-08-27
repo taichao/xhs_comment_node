@@ -18,16 +18,33 @@
 	<section class="panel">
 	<div class="innertop">
 		<div class="inner" style="border-right:1px solid #ccc">
-			请选择分类
+			<div class="innerbox" style="width:100%;
+			height:50px;margin-bottom:20px;">
+				<span style="display:block;width:30%;height:50px;line-height:50px;float:left;">请选择分类</span>
+                <!--<div class="add" style="border:1px solid blue;float:right;width:65%;height:50px;">-->
+
+				<!--</div>-->
+			</div>
+
 			<% if( result ) { %>
 				<% result.forEach(function(category){%>
 					<div class="category" category_id="<%= category.id %>" id="<%= category.id %>"><%= category.item.name %></div>
 					<% if( category.child ){ %>
 						<% category.child.forEach(function(child){%>
 							<div style="margin-left:100px;" class="category" category_id="<%= child.id %>" id="child_<%= category.id %>"><%= child.item.name %></div>
+
 						<%});%>
+
+
+			        <div style="height:50px;margin-left:100px;">
+						<button type="submit" class="btn btn-danger add_comment" style="margin-top:5px;">添加</button>
+					</div>
+
 					<% } %>
+
 				<%});%>
+
+			<button type="submit" class="btn btn-danger add_comment" style="margin-top:5px;">添加</button>
 			<% } %>
 		</div>
 		<div class="inner" style="height:100%;margin-left:10px;">
