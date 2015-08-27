@@ -1,5 +1,6 @@
 define(function(require , exports , module) {
 	var $ = require('jquery');
+	var layer = require('../app/common/layer');
 
 	var release_comment_list = function(){
 		$('#radio-01').bind('click' , function(){
@@ -96,6 +97,9 @@ define(function(require , exports , module) {
 	}
 
 	var category_search = function(categoryId , page){
+		
+		layer.createLayer();	
+		layer.banScroll();	
 		$.ajax({
 				url			: '/comment/category_comment?categoryId='+categoryId+'&page='+page,
 				type		: 'GET',
@@ -105,15 +109,23 @@ define(function(require , exports , module) {
 				$('#comment_list').html('')
 				$('#comment_list').html(data);
 				$('.page').attr('search' , categoryId).attr('type' , 'category');
+				layer.allowScroll();
+				layer.closeLayer();
 			})
 			.fail(function(){
+				layer.allowScroll();
+				layer.closeLayer();
 				console.log('error');
 			});
 	}
 
 	var key_search = function(content , page){
+		
+		var type = $('.radio:checked').val();
+		layer.createLayer();	
+		layer.banScroll();	
 		$.ajax({
-				url			: '/comment/search_comment?content='+content+'&page='+page,
+				url			: '/comment/search_comment?content='+content+'&page='+page+'&type='+type,
 				type		: 'GET',
 				dataType	: 'html'
 			})
@@ -121,9 +133,13 @@ define(function(require , exports , module) {
 				$('#comment_list').html('')
 				$('#comment_list').html(data);
 				$('.page').attr('search' , content).attr('type' , 'key');
+				layer.allowScroll();
+				layer.closeLayer();
 
 			})
 			.fail(function(){
+				layer.allowScroll();
+				layer.closeLayer();
 				console.log('error');
 			});
 	}
@@ -142,6 +158,7 @@ define(function(require , exports , module) {
 			$('#user_nick').val('');
 			$('#user_comment').val('');
 			$('body').append(data);
+			$('input[name="comment"]:checked').attr('checked' , false);
 		})
 		.fail(function(data){
             console.log('error');
@@ -154,8 +171,10 @@ define(function(require , exports , module) {
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
 		if(type == 'key'){
+
 			key_search(content , page);
 		}else{
+			
 			category_search(content , page);
 		}
 		$('#pre_page').attr('page', page);
@@ -168,8 +187,10 @@ define(function(require , exports , module) {
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
 		if(type == 'key'){
+			
 			key_search(content , page);
 		}else{
+			
 			category_search(content , page);
 		}
 		$('#next_page').attr('page' , page);

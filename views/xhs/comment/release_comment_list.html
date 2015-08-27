@@ -25,10 +25,13 @@
                            <div class="text" style="margin-right:15px">&nbsp;筛选条件：</div>
                            <div class="radios" >
                                <label class="label_radio r_off" for="radio-01" style="float:left;margin-right:20px;">
-                                   <input name="sample-radio" id="radio-01" value="1" type="radio" checked> 关键字
+                                   <input style="float:left" name="sample-radio" class="radio" id="radio-01" value="" type="radio" checked> 关键字
+                               </label>
+							   <label class="label_radio r_off" for="radio-01" style="float:left;margin-right:20px;">
+                                   <input style="float:left" name="sample-radio" class="radio" id="radio-03" value="zhihu" type="radio"> 知乎
                                </label>
 							   <label class="label_radio r_off" for="radio-02" style="float:left">
-                                   <input name="sample-radio" id="radio-02" value="1" type="radio">分类
+                                   <input style="float:left" name="sample-radio" id="radio-02" value="1" type="radio">分类
                                </label>
                            </div>
                        </div>
@@ -41,10 +44,10 @@
 							   <button type="submit" class="search_comment btn btn-danger" style="margin-right:72px">查询</button>
 						   </div>
 
-							<select style="width:auto;display:none" id="category_select" class="form-control category" size="1" name="example_length" aria-controls="example">
+							<select style="width:auto;display:none;float:left;margin-top:8px;" id="category_select" class="form-control category" size="1" name="example_length" aria-controls="example">
 								<option value="0" selected="selected">请选择</option>
 							</select>	 
-							<select style="width:auto;display:none" id="category_select_child" class="form-control category" size="1" name="example_length" aria-controls="example">
+							<select style="width:auto;display:none;float:left;margin-top:8px;margin-left:10px;" id="category_select_child" class="form-control category" size="1" name="example_length" aria-controls="example">
 								<option value="0" selected="selected">请选择</option>
 							</select>
                        </div>
@@ -99,9 +102,6 @@
     </section>
     <!--main content end-->
 
-      <%include ../common/foot.html%>
-
-</section>
 
 <script>
 	seajs.use("page/release_comment_list" , function(obj){
@@ -109,5 +109,4 @@
 	});
 </script>
 
-</body>
-</html>
+<%include ../common/foot.html%>

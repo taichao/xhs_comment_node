@@ -102,10 +102,8 @@ router.post('/push_comment' , function(req , res , next){
 
 	var url = '/basecomment/commentIt';
 
-	var data = req.query;
+	var data = req.body;
 	data.commentList = JSON.parse(data.commentList);
-	console.log(data);
-
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
         console.log(jsonStr);
