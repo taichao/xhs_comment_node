@@ -7,10 +7,11 @@
 #fi
 rf=$(pwd)'/../'
 
+cmd='start_xhs'
 
 stopService() {
 	echo 'stop service'	
-	for proc in `ps -ef | grep node | grep .js | awk '{print $2}'`; do
+	for proc in `ps -ef | grep node | grep $cmd.js | awk '{print $2}'`; do
 		kill   $proc ; done
 	if [ -f $rf'config/pids' ]; then  	
 		rm -r $rf'config/pids'
@@ -22,7 +23,7 @@ startService() {
 	echo 'SERVICE START AT '` date +%Y/%m/%d-%T` >> $server_log
 	mkdir -p $server_logf
 	echo 'web service start , logfile:'$server_log	
-	nohup node start.js >> $server_log &
+	nohup node $cmd.js >> $server_log &
 
 }
 
