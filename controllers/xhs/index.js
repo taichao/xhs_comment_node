@@ -26,9 +26,37 @@ router.get('/index' , function(req , res , next){
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		console.log(jsonStr);
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			jsonStr.cid = data.cid;
+			jsonStr.ctype = data.ctype;
 			res.render('xhs/index' , jsonStr);
+		}else{
+			res.redirect('/login');
+		}
+	});
+
+});
+
+router.post('/index' , function(req , res , next){
+
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/article/refreshArticleList';
+
+	var data = req.body;
+	if(!data){
+		var data = {
+			cid:470,
+			ctype:4001
+		};
+	}
+
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.render('xhs/index_article_list' , jsonStr , function(err , html){
+				res.send(html);
+			});
 		}else{
 			res.redirect('/login');
 		}

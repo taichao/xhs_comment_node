@@ -26,6 +26,9 @@ define(function(require , exports , module) {
 				},
 				dataType	: 'json'
 			}).done(function(data){
+				$('#input_category_id').val('');
+				$('#category_name').val('');
+				$('#content').val('');
 				$('body').append(data);
 			}).fail(function(data){
 				console.log(data);
@@ -58,6 +61,35 @@ define(function(require , exports , module) {
 			$('.add-category-dialog').hide();
 			$('.add-category-layer').hide();	
 		});
+
+		
+		$('.xhs-add-category-button').bind('click' , function(){
+			var parent = $('#add_category_id').val();
+			var name = $('#add_category_name').val();
+
+			$.ajax({
+				url		: '/common_comment/add_category',
+				type	: 'POST',
+				data	: {
+					parent	: parent,
+					name	: name
+				},
+				dataType	: 'html'
+			}).done(function(data){
+				console.log(data);
+				if(parent == 0){
+					$('#accordion').prepend(data);
+				}else{
+					$('#collapse_'+parent).prepend(data);	
+				}
+
+				$('.add-category-dialog').hide();
+				$('.add-category-layer').hide();
+			}).fail(function(data){
+				console.log(error);
+			});
+		});
+
 
 	}
 });

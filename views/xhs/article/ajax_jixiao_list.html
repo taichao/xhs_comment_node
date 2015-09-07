@@ -1,5 +1,8 @@
-<% if(result.length){ %>
-<% result.forEach(function(obj){%>
+<tr>
+	<td>总评论数: <%=result.count%></td>
+</tr>
+<% if(result.list.length){ %>
+<% result.list.forEach(function(obj){%>
 <tr>
 	<td><a href="#"><%= obj.articleId%></a></td>
 	<td class="hidden-phone"><%= obj.userNickName%></td>

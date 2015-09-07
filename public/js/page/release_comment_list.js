@@ -3,8 +3,18 @@ define(function(require , exports , module) {
 	var layer = require('../app/common/layer');
 
 	var release_comment_list = function(){
+		$('#key_search').bind('focus' , function(){
+			$(this).val('');
+		});
 		$('#radio-01').bind('click' , function(){
 			$('.key').show();
+			$('#key_num').show();
+			$('.category').hide();
+		});
+
+		$('#radio-03').bind('click' , function(){
+			$('.key').show();
+			$('#key_num').hide();
 			$('.category').hide();
 		});
 		$('#radio-02').bind('click' , function(){
@@ -45,9 +55,10 @@ define(function(require , exports , module) {
 
 		$('.search_comment').bind('click' , function(){
 			var content = $('#key_search').val();
+			var num = $('#key_num').val();
 			var page = 1;
 			$('#pre_page').hide();
-			key_search(content , page);
+			key_search(content , page , num);
 
 		});
 		$('#category_select').bind('change' , function(){
@@ -119,20 +130,20 @@ define(function(require , exports , module) {
 			});
 	}
 
-	var key_search = function(content , page){
+	var key_search = function(content , page , num){
 		
 		var type = $('.radio:checked').val();
 		layer.createLayer();	
 		layer.banScroll();	
 		$.ajax({
-				url			: '/comment/search_comment?content='+content+'&page='+page+'&type='+type,
+				url			: '/comment/search_comment?content='+content+'&page='+page+'&type='+type+'&num='+num,
 				type		: 'GET',
 				dataType	: 'html'
 			})
 			.done(function(data){
 				$('#comment_list').html('')
 				$('#comment_list').html(data);
-				$('.page').attr('search' , content).attr('type' , 'key');
+				$('.page').attr('search' , content).attr('type' , 'key').attr('num' , num);;
 				layer.allowScroll();
 				layer.closeLayer();
 
@@ -163,6 +174,8 @@ define(function(require , exports , module) {
 		.fail(function(data){
             console.log('error');
 		});
+
+
 	}
 
 	$('#next_page').bind('click' , function(){
@@ -170,9 +183,10 @@ define(function(require , exports , module) {
 		var type = $(_this).attr('type');
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
+		var page = $(_this).attr('num');
 		if(type == 'key'){
 
-			key_search(content , page);
+			key_search(content , page , num);
 		}else{
 			
 			category_search(content , page);
@@ -186,9 +200,10 @@ define(function(require , exports , module) {
 		var type = $(_this).attr('type');
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
+		var page = $(_this).attr('num');
 		if(type == 'key'){
 			
-			key_search(content , page);
+			key_search(content , page , num);
 		}else{
 			
 			category_search(content , page);
@@ -206,6 +221,15 @@ define(function(require , exports , module) {
 	});
 	$('body').on('click' , '.close_ok' , function(){
 		$('.modal').hide()
+	});
+
+	
+	$('#all_checkbox').bind('click' , function(){
+		$("input[name='comment']").prop('checked' , true);	
+	});
+
+	$('#all_not_checkbox').bind('click' , function(){
+		$("input[name='comment']").prop('checked' , false);	
 	});
 
 	exports.release_comment_list = release_comment_list;

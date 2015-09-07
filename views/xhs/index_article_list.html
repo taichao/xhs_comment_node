@@ -1,0 +1,14 @@
+				<% if(result.length){ var i=1; %>
+				<% result.forEach(function(list){%>
+				<tr>
+					<td><%= i %></td>
+					<td><a href="#"><%= list.id %></a></td>
+					<td class="hidden-phone"><%= list.topic %></td>
+					<td><%= list.releaseDate %></td>
+					<td><span class="label label-info label-mini"><%= list.comment %></span></td>
+					<td><span class="label label-info label-mini"><%= list.commentsCount %></span></td>
+					<td>
+						<a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-primary">发评论</a>
+					</td>
+				</tr>
+				<% i++; });} %>

@@ -4,6 +4,9 @@
 	<td><a href="#"><%= list.id %></a></td>
 	<td class="hidden-phone"><%= list.title %></td>
 	<td><%= list.publishDate %></td>
-	<td><a href="" class="btn btn-primary">已发评论</a></td>
+	
+	<td>
+		<a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.title %>" class="btn btn-primary">发评论</a>
+	</td>
 </tr>
 <% });} %>

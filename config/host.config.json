@@ -1,0 +1,8 @@
+{
+	"host"		: "192.168.1.222",
+	"port"		: 8085,
+	"debug"		: true,
+	"timeout"	: 5000,
+    "baseUrl": "http://192.168.1.222:8085/httpclient",
+	"baseUrl_bak": "http://192.168.0.10:8080/httpclient"
+}

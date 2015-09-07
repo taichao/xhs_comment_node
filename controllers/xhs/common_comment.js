@@ -14,10 +14,15 @@ router.get('/common_comment_list' , function(req , res , next){
 	var url = '/basecomment/getCategory';
 
 	var data = req.body;
+	var open  = req.query;
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		jsonStr.open = jsonStr.result[0].id;
+		if(open){
+			jsonStr.open = open.id;
+		}else{
+			jsonStr.open = jsonStr.result[0].id;
+		}
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			res.render('xhs/comment/common_comment_list' , jsonStr);
 		}else{
@@ -62,10 +67,19 @@ router.post('/add_category' , function(req , res , next){
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-		jsonStr.open = data.parent;
-
-		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
-			res.redirect('/common_comment/common_comment_list');
+		if('SUCCESS' == jsonStr.code ){
+			data.oldparent = data.parent;
+			data.parent = jsonStr.result;
+			if(data.oldparent == 0){
+				res.render('xhs/comment/parent_category' , data , function(err , html){
+					console.log(html);
+					res.send(html);
+				});
+			}else{
+				res.render('xhs/comment/child_category' , data , function(err , html){
+					res.send(html);
+				});
+			}
 		}else{
 			res.redirect('/common_comment/common_comment_list');
 		}

@@ -1,10 +1,9 @@
 views/.DS_Store
 *.log
-/log/
+/log/*
 .DS_Store
 .idea/
-host.config.json
-/logs/
+/logs/*
 *.swp
 *.swo
 *.swn

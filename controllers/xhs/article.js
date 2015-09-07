@@ -39,12 +39,12 @@ router.get('/article_list' , function(req , res , next) {
         publisDate:moment().format('YYYY-MM-DD')
     };
 
-	console.log(data);
-
     baseRequest.post(url , data , function(err , response , body){
         var jsonStr = JSON.parse(body);
-		console.log(jsonStr);
+		
 		jsonStr.day = data.publisDate;
+		jsonStr.openmenu = 'article';
+		jsonStr.selectmenu = 'article_list';
         if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
             res.render('xhs/article/articleManage_list' , jsonStr);
         }else{
@@ -64,7 +64,6 @@ router.post('/article_list' , function(req , res , next) {
     baseRequest.post(url , data , function(err , response , body){
         var jsonStr = JSON.parse(body);
 		jsonStr.day = data.publisDate;
-		console.log(jsonStr);
         if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
             res.render('xhs/article/ajax_article_list' , jsonStr , function(err , html){
 				res.send(html);
@@ -109,28 +108,11 @@ router.get('/jixiao', function(req, res, next) {
     remote(req , res , options , function(data){
         data['userInfo'] = data.commentList.userInfo;
 		data['day'] = info.createTime;
-        console.log(data.userList.result);
+		data['openmenu'] = 'article';
+		data['selectmenu'] = 'jixiao';
         res.render('xhs/article/jixiao' , data);
     });
 
-    /*
-       var data = {
-userId		:info.nickName,
-addDate		:info.createTime,
-pageIndex	:"0",
-pageCount	:"50"
-};
-
-baseRequest.post(url , data , function(err , response , body){
-var jsonStr = JSON.parse(body);
-if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
-res.render('xhs/article/jixiao' , jsonStr);
-}else{
-res.redirect('/login');
-    // var json = JSON.stringify();
-    }
-    });
-    */
 });
 
 /*绩效管理 ajax*/
@@ -145,13 +127,12 @@ router.post('/jixiao', function(req, res, next) {
         pageIndex	:"0",
         pageCount	:"50"
     };
-	console.log(data);
     baseRequest.post(url , data , function(err , response , body){
         var jsonStr = JSON.parse(body);
-        console.log(jsonStr);
         // res.end();
         if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
             res.render('xhs/article/ajax_jixiao_list' , jsonStr , function(err , html){
+				console.log(html);
 				res.send(html);
 			});
         }else{
@@ -176,7 +157,6 @@ router.get('/adminUserList', function(req, res, next) {
     };
     baseRequest.post(url , data , function(err , response , body){
         var jsonStr = JSON.parse(body);
-        console.log(jsonStr);
         // res.end();
         if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
             res.render('xhs/article/adminUserList' , jsonStr);

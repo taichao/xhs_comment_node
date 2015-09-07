@@ -61,7 +61,6 @@ router.get('/search_comment' , function(req , res , next){
 
 	var data = req.query;
 	data.queryType = 2;
-	data.num = 50;
 
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);

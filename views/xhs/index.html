@@ -4,14 +4,29 @@
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="width:50%;float:left;">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" style="width:98%;margin:0 auto 10px">
                     <li><a href="#">新闻列表</a></li>
-                    <!--<li><a href="#">讲解人管理</a></li>-->
                 </ul>
                 <!--breadcrumbs end -->
             </div>
+			<div style="float:left;width:200px;">
+				<select id="xhs_select_news" class="form-control" style="">
+					<option cid="470" ctype="4001">要闻</option>
+					<option cid="461" ctype="4002">体育</option>
+					<option cid="462" ctype="4002">国际</option>
+					<option cid="463" ctype="4002">财经</option>
+					<option cid="464" ctype="4002">军事</option>
+					<option cid="477" ctype="4002">汽车</option>
+					<option cid="479" ctype="4002">图片</option>
+					<option cid="480" ctype="4002">视频</option>
+					<option cid="235" ctype="4003">评论</option>
+					<option cid="3172" ctype="4003">社会</option>
+					<option cid="3173" ctype="4003">科技</option>
+					<option cid="3174" ctype="4003">动新闻</option>
+				</select>
+			</div>
         </div>
 
         <!--列表页面-->
@@ -25,23 +40,12 @@
                             <th class="hidden-phone"><i class="icon-question-sign"></i> 标题</th>
                             <th><i class="icon-bookmark"></i> 时间</th>
                             <th><i class=" icon-edit"></i> 评论数</th>
+                            <th><i class=" icon-edit"></i> 本地评论数</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <% if(result.length){ var i=1; %>
-                        <% result.forEach(function(list){%>
-                        <tr>
-							<td><%= i %></td>
-                            <td><a href="#"><%= list.id %></a></td>
-                            <td class="hidden-phone"><%= list.topic %></td>
-                            <td><%= list.releaseDate %></td>
-                            <td><span class="label label-info label-mini"><%= list.comment %></span></td>
-                            <td>
-                                <a href="/comment/release_comment_list?id=<%= list.id %>&title=<%= list.topic %>" class="btn btn-primary">发评论</a>
-                            </td>
-                        </tr>
-                        <% i++; });} %>
+                    <tbody id="xhs_news_tbody">
+						<%include ./index_article_list.html%>
                     </tbody>
                 </table>
             </section>
@@ -67,5 +71,11 @@
 
 </section>
 <!--main content end-->
+
+<script>
+	seajs.use('page/index' , function(obj){
+		obj();	
+	});
+</script>
 
 <%include common/foot.html%>
