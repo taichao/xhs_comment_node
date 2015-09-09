@@ -221,6 +221,8 @@ define(function(require , exports , module) {
 	}
 
 	var push_comment = function(articleId , data){
+		layer.createLayer();	
+		layer.banScroll();	
 		$.ajax({
 		  url		: '/comment/push_comment',
 		  type		: 'POST',
@@ -231,12 +233,16 @@ define(function(require , exports , module) {
 		  dataType	: 'html'
 		})
 		.done(function(data){
+			layer.allowScroll();
+			layer.closeLayer();
 			$('#user_nick').val('');
 			$('#user_comment').val('');
 			$('body').append(data);
 			$('input[name="comment"]:checked').attr('checked' , false);
 		})
 		.fail(function(data){
+			layer.allowScroll();
+			layer.closeLayer();
             console.log('error');
 		});
 
