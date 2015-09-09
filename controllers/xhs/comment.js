@@ -5,7 +5,59 @@
 var express = require('express');
 var router = express.Router();
 var remoteRequest = require('libs/remoteRequest');
+var remote = require('libs/remote');
 var checkLogin = require('libs/checkLogin')
+
+/* 发布评论列表 */
+router.get('/release_one_comment_list', function(req, res, next) {
+
+	/*checkLogin(req , res , function(){
+
+		var url = "/getMenu";
+		baseRequest = remoteRequest(req , res);
+		baseRequest.post(url , data , function(err , response , body){
+			var jsonStr = JSON.parse(body);
+			jsonStr.title = data.title;
+			jsonStr.id = data.id;
+			if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+				res.render('xhs/comment/release_comment_list' , jsonStr);
+			}else{
+				res.redirect('/login');
+			}
+		});
+	});*/
+
+	var info = req.query;
+	
+    var options = {
+        'category' : {
+            'url':'/httpclient/basecomment/getCategory',
+            'data':{
+            },
+            'method':'POST'
+
+        },
+        'menu' : {
+            'url':'/httpclient/getMenu',
+            'data':{},
+            'method':'POST'
+
+        }
+
+    }
+
+    remote(req , res , options , function(data){
+		if(data.menu.code == 'NEED_LOGIN'){
+			res.redirect('/login');
+		}
+        data['userInfo'] = data.menu.userInfo;
+		console.log(data.category.result);
+		data.title = info.title;
+		data.id = info.id;
+		res.render('xhs/comment/release_one_comment_list' , data);
+    });
+
+});
 
 /* 发布评论列表 */
 router.get('/release_comment_list', function(req, res, next) {
@@ -26,7 +78,7 @@ router.get('/release_comment_list', function(req, res, next) {
 			}
 		});
 	});
-
+	
 });
 
 router.get('/comment', function(req, res, next) {
@@ -57,11 +109,19 @@ router.get('/comment_category' , function(req , res , next){
 router.get('/search_comment' , function(req , res , next){
 	var baseRequest = remoteRequest(req , res);
 
+	var data = req.query;
 	var url = '/basecomment/queryRemoteComment';
 
-	var data = req.query;
-	data.queryType = 2;
+	if(data.type == 'weibo'){
+		
+		data.queryType = 3;
 
+	}else{
+
+		data.queryType = 2;
+
+		
+	}
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){

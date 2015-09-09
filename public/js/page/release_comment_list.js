@@ -6,20 +6,47 @@ define(function(require , exports , module) {
 		$('#key_search').bind('focus' , function(){
 			$(this).val('');
 		});
+		$('#weibo_search').bind('focus' , function(){
+			$(this).val('');
+		});
 		$('#radio-01').bind('click' , function(){
 			$('.key').show();
 			$('#key_num').show();
+			$('#key_search').show();
 			$('.category').hide();
+			$('#weibo_search').hide();
+			$('.news_list').hide();
 		});
 
 		$('#radio-03').bind('click' , function(){
 			$('.key').show();
 			$('#key_num').hide();
+			$('#key_search').show();
 			$('.category').hide();
+			$('#weibo_search').hide();
+			$('.news_list').hide();
 		});
+		$('#radio-04').bind('click' , function(){
+			$('.key').show();
+			$('#key_num').show();
+			$('#key_search').hide();
+			$('.category').hide();
+			$('#weibo_search').show();
+			$('.news_list').hide();
+		});
+
+		$('#radio-05').bind('click' , function(){
+			$('.category').hide();
+			$('.key').hide();
+			$('#weibo_search').hide();
+			$('.news_list').show();
+		});
+
 		$('#radio-02').bind('click' , function(){
 			$('.category').show();
 			$('.key').hide();
+			$('#weibo_search').hide();
+			$('.news_list').hide();
 
 			$.ajax({
 				url			:'/comment/comment_category',
@@ -54,7 +81,13 @@ define(function(require , exports , module) {
 		});
 
 		$('.search_comment').bind('click' , function(){
-			var content = $('#key_search').val();
+			
+			var type = $('.radio:checked').val();
+			if(type == 'weibo'){
+				var content = $('#weibo_search').val();
+			}else{
+				var content = $('#key_search').val();
+			}
 			var num = $('#key_num').val();
 			var page = 1;
 			$('#pre_page').hide();
@@ -85,6 +118,8 @@ define(function(require , exports , module) {
 				comment.id = $(this).val();
 				comment.comment = $('#content_'+$(this).val()).html();
 				comment.nick = $('#nickname_'+$(this).val()).html();
+				//comment.comment = $(this).parent().parent().find('td[class="content"]').html();
+				//comment.nick = $(this).parent().parent().find('td[class="nickname"]').html();
 				data.push(comment);
 			});
 			data = JSON.stringify(data);
@@ -103,6 +138,34 @@ define(function(require , exports , module) {
 			var articleId = $('#article_id').attr('article_id');
 
 			push_comment(articleId , data);
+
+			var parent = $('#add_category').find('option:selected').val();
+			var child = $('#add_categor_child').find('option:selected').val();
+
+
+			var data = [];
+			var comment = {};
+			comment.content = $('#user_comment').val();
+			comment.nick = $('#user_nick').val();
+			data.push(comment);
+			data = JSON.stringify(data);
+			if(child){
+				$.ajax({
+					url			: '/common_comment/add_comment',
+					type		: 'POST',
+					data		: {
+						categoryId:child,
+						commentList:data
+					},
+					dataType	: 'json'
+				}).done(function(remotedata){
+					$('#user_nick').val('');
+					$('#user_comment').val('');
+					console.log(remotedata);
+				}).fail(function(remotedata){
+					console.log(remotedata);
+				});
+			}
 
 		});
 	}
@@ -135,8 +198,10 @@ define(function(require , exports , module) {
 		var type = $('.radio:checked').val();
 		layer.createLayer();	
 		layer.banScroll();	
+		
+		var url = '/comment/search_comment?content='+content+'&page='+page+'&type='+type+'&num='+num;
 		$.ajax({
-				url			: '/comment/search_comment?content='+content+'&page='+page+'&type='+type+'&num='+num,
+				url			: url,
 				type		: 'GET',
 				dataType	: 'html'
 			})
@@ -183,7 +248,7 @@ define(function(require , exports , module) {
 		var type = $(_this).attr('type');
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
-		var page = $(_this).attr('num');
+		var num = $(_this).attr('num');
 		if(type == 'key'){
 
 			key_search(content , page , num);
@@ -200,7 +265,7 @@ define(function(require , exports , module) {
 		var type = $(_this).attr('type');
 		var content = $(_this).attr('search');
 		var page = $(_this).attr('page');
-		var page = $(_this).attr('num');
+		var num = $(_this).attr('num');
 		if(type == 'key'){
 			
 			key_search(content , page , num);
@@ -230,6 +295,14 @@ define(function(require , exports , module) {
 
 	$('#all_not_checkbox').bind('click' , function(){
 		$("input[name='comment']").prop('checked' , false);	
+	});
+
+	$('#add_category').bind('change' , function(){
+	
+		$('#add_categor_child').find('option').prop('selected' , false).hide();
+		var parent = $(this).find('option:selected').val();
+		$('#add_categor_child').find('option[value=0]').prop('selected' , true);
+		$('option[parent="'+parent+'"]').show();
 	});
 
 	exports.release_comment_list = release_comment_list;
