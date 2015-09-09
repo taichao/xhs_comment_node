@@ -26,10 +26,11 @@ define(function(require , exports , module) {
 				},
 				dataType	: 'json'
 			}).done(function(data){
-				$('#input_category_id').val('');
-				$('#category_name').val('');
 				$('#content').val('');
-				$('body').append(data);
+				$('#one-comment').append(data);
+				setTimeout(function(){
+					$('.alert-success').remove();
+				} , 500);
 			}).fail(function(data){
 				console.log(data);
 			});

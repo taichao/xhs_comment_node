@@ -46,12 +46,17 @@ router.post('/add_comment' , function(req , res , next){
 		var jsonStr = JSON.parse(body);
 		console.debug(jsonStr);
 
+		if('LOGIN_FAILED' == jsonStr.code){
+			res.redirect('/login');
+		}
+
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			var data = {
 				'title' : "添加评论",
 				'content' : "添加成功"
 			}
-			res.render('xhs/common/alert' , data , function(err , html){
+			res.render('xhs/common/success' , data , function(err , html){
+console.log(data);
 				res.end(JSON.stringify(html))
 			});
 		}
