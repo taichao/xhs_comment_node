@@ -40,7 +40,31 @@ define(function(require , exports , module) {
 			$('.key').hide();
 			$('#weibo_search').hide();
 			$('.news_list').show();
+			layer.createLayer();	
+			var title = $.trim($('#article_id').html());
+			$.ajax({
+				url		: '/comment/getArticleByAnyChannel',
+				type	: 'POST',
+				dataType: 'html',
+				data	: {title:title}
+			})
+			.done(function(data){
+				$('body').append(data);
+			})
+			.fail(function(data){
+				layer.allowScroll();
+				layer.closeLayer();
+				console.log('error');
+			});
 		});
+
+		$('body').on('click' ,'#look_comment' ,  function(){
+			var newsid = $(this).attr('newsid');
+			var type = $(this).attr('type');
+			lookCommentByChannel(newsid , type , 1);
+			
+		});
+
 
 		$('#radio-02').bind('click' , function(){
 			$('.category').show();
@@ -91,6 +115,7 @@ define(function(require , exports , module) {
 			var num = $('#key_num').val();
 			var page = 1;
 			$('#pre_page').hide();
+			$('#next_page').attr('page' , page)
 			key_search(content , page , num);
 
 		});
@@ -220,6 +245,27 @@ define(function(require , exports , module) {
 			});
 	}
 
+	var lookCommentByChannel = function(newsid , type , page){
+	
+		$.ajax({
+				url		:"/comment/channelCommentList?newsid="+newsid+"&type="+type+"&page="+page,
+				type	:'GET',
+				datatype:'html'
+			})
+			.done(function(data){
+				layer.allowScroll();
+				layer.closeLayer();
+				$('.modal').hide()
+				$('#comment_list').append(data);
+				$('.page').attr('type' , type);
+				$('.page').attr('newsid' , newsid);
+			})
+			.fail(function(data){
+				layer.allowScroll();
+				layer.closeLayer();
+			});
+	}
+
 	var push_comment = function(articleId , data){
 		layer.createLayer();	
 		layer.banScroll();	
@@ -262,7 +308,15 @@ define(function(require , exports , module) {
 			
 			category_search(content , page);
 		}
-		$('#pre_page').attr('page', page);
+		var tmp_page = parseInt(Number(page) - 1);
+		if(tmp_page == 0){
+			$('#pre_page').attr('page', 1);
+		}else if(type == 'news'){
+			var newsid = $(_this).attr('newsid');
+			lookCommentByChannel(newsid , type , page);
+		}else{
+			$('#pre_page').attr('page', tmp_page);
+		}
 		$(_this).attr('page', parseInt(Number(page) + 1));
 		$('#pre_page').show();
 	});
@@ -275,23 +329,35 @@ define(function(require , exports , module) {
 		if(type == 'key'){
 			
 			key_search(content , page , num);
+		}else if(type == 'news'){
+			var newsid = $(_this).attr('newsid');
+			lookCommentByChannel(newsid , type , page);
 		}else{
 			
 			category_search(content , page);
 		}
-		$('#next_page').attr('page' , page);
+		$('#next_page').attr('page' , parseInt(Number(page) + 1));
 		if(page <= 1){
 			$(_this).hide();
 		}else{
-			$(_this).attr('page' , parseInt(Number(page) - 1));
+			var tmp_page = parseInt(Number(page) - 1);
+			if(tmp_page == 0){
+				$(_this).attr('page' , 1);
+			}else{
+				$(_this).attr('page' , tmp_page);
+			}
 		}
 	});
 
 	$('body').on('click' , '.close' , function(){
 		$('.modal').hide()
+		layer.allowScroll();
+		layer.closeLayer();
 	});
 	$('body').on('click' , '.close_ok' , function(){
 		$('.modal').hide()
+		layer.allowScroll();
+		layer.closeLayer();
 	});
 
 	

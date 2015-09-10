@@ -174,10 +174,65 @@ router.post('/push_comment' , function(req , res , next){
 			res.render('xhs/common/alert' , data , function(err , html){
 				res.send(html);
 			});
+		}else{
+			res.end();
 		}
 	});
 });
 
+
+//根据文章标题匹配新闻评论
+router.post('/getArticleByAnyChannel' , function(req , res , next){
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/article/getNewsListByTitle';
+
+	
+	var data = {
+		'type':'news',
+		'page':1,
+		'num':50
+	};
+	data.title = req.body.title;
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		jsonStr.title = data.title;
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.render('xhs/article/channel_article_list' , jsonStr , function(err , html){
+				res.send(html);
+			});
+		}else{
+			res.end();
+		}
+	});	
+
+});
+
+
+router.get('/channelCommentList' , function(req , res , next){
+	var baseRequest = remoteRequest(req , res);
+
+	var url = '/article/getCommentsByNews';
+
+	var data = req.query;
+	data.newsid = '34'
+	data.page = 1;
+	data.num = 50;
+	console.log(data);
+	baseRequest.post(url , data , function(err , response , body){
+		var jsonStr = JSON.parse(body);
+		jsonStr.title = data.title;
+		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
+			res.render('xhs/comment/comment_list' , jsonStr , function(err , html){
+				res.send(html);
+			});
+		}else{
+			res.end();
+		}
+
+	});	
+
+});
 
 
 
