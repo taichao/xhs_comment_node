@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var remoteRequest = require('libs/remoteRequest');
+var remote = require('libs/remote');
 
 /* 获取管理员列表 */
 router.get('/userList', function(req, res, next) {
@@ -74,6 +75,48 @@ router.post('/getUserById', function(req, res, next) {
 });
 
 /*昵称筛选*/
+router.get('/getNickName', function(req, res, next) {
+
+	var options = {
+		'userInfo'		: {
+			'url'	: '/httpclient/adminUser/getCurrentUser',
+			'data'	: '',
+			'method': 'POST'
+		},
+		'nickName'		: {
+			'url'	: '/httpclient/nick/getNickListByPage',
+			'data'	: '',
+			'method': 'POST'
+		}
+	};
+
+	remote(req , res , options , function(data){
+		data.userInfo = data.userInfo.userInfo;
+		res.render('xhs/user/nick_name_list' , data );
+	});
+
+});
+
+/*审核通过*/
+router.post('/filterNick', function(req, res, next) {
+
+	var data = req.body;
+	data.nickList = JSON.parse(data.nickList);
+	var options = {
+		'check'		: {
+			'url'	: '/httpclient/nick/filterNick',
+			'data'	: data,
+			'method': 'POST'
+		},
+	};
+
+	remote(req , res , options , function(data){
+		console.log(data);
+		res.end();
+		//res.render('xhs/user/nick_name_list' , data );
+	});
+
+});
 
 
 module.exports = router;

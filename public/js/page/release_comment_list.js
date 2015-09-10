@@ -9,6 +9,9 @@ define(function(require , exports , module) {
 		$('#weibo_search').bind('focus' , function(){
 			$(this).val('');
 		});
+		$('#key_title').bind('focus' , function(){
+			$(this).val('');
+		});
 		$('#radio-01').bind('click' , function(){
 			$('.key').show();
 			$('#key_num').show();
@@ -16,6 +19,7 @@ define(function(require , exports , module) {
 			$('.category').hide();
 			$('#weibo_search').hide();
 			$('.news_list').hide();
+			$('#key_title').hide();
 		});
 
 		$('#radio-03').bind('click' , function(){
@@ -25,6 +29,7 @@ define(function(require , exports , module) {
 			$('.category').hide();
 			$('#weibo_search').hide();
 			$('.news_list').hide();
+			$('#key_title').hide();
 		});
 		$('#radio-04').bind('click' , function(){
 			$('.key').show();
@@ -33,29 +38,18 @@ define(function(require , exports , module) {
 			$('.category').hide();
 			$('#weibo_search').show();
 			$('.news_list').hide();
+			$('#key_title').hide();
 		});
 
 		$('#radio-05').bind('click' , function(){
 			$('.category').hide();
-			$('.key').hide();
+			$('.key').show();
+			$('#key_num').hide();
+			$('#key_search').hide();
 			$('#weibo_search').hide();
-			$('.news_list').show();
-			layer.createLayer();	
-			var title = $.trim($('#article_id').html());
-			$.ajax({
-				url		: '/comment/getArticleByAnyChannel',
-				type	: 'POST',
-				dataType: 'html',
-				data	: {title:title}
-			})
-			.done(function(data){
-				$('body').append(data);
-			})
-			.fail(function(data){
-				layer.allowScroll();
-				layer.closeLayer();
-				console.log('error');
-			});
+			$('.news_list').hide();
+			$('#key_title').show();
+			
 		});
 
 		$('body').on('click' ,'#look_comment' ,  function(){
@@ -71,6 +65,7 @@ define(function(require , exports , module) {
 			$('.key').hide();
 			$('#weibo_search').hide();
 			$('.news_list').hide();
+			$('#key_title').hide();
 
 			$.ajax({
 				url			:'/comment/comment_category',
@@ -109,13 +104,30 @@ define(function(require , exports , module) {
 			var type = $('.radio:checked').val();
 			if(type == 'weibo'){
 				var content = $('#weibo_search').val();
+			}else if(type == 'news'){
+				layer.createLayer();	
+				var title = $.trim($('#key_title').val());
+				$.ajax({
+					url		: '/comment/getArticleByAnyChannel',
+					type	: 'POST',
+					dataType: 'html',
+					data	: {title:title}
+				})
+				.done(function(data){
+					$('body').append(data);
+				})
+				.fail(function(data){
+					layer.allowScroll();
+					layer.closeLayer();
+					console.log('error');
+				});
 			}else{
 				var content = $('#key_search').val();
 			}
 			var num = $('#key_num').val();
 			var page = 1;
 			$('#pre_page').hide();
-			$('#next_page').attr('page' , page)
+			$('#next_page').attr('page' , page);
 			key_search(content , page , num);
 
 		});
