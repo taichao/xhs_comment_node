@@ -31,7 +31,7 @@
                         </thead>
                         <tbody id="article_list">
 
-                        <% if(nickName.result.length){ var num=1;%>
+                        <% if(nickName.result != null){ var num=1;%>
                         <% nickName.result.forEach(function(list){%>
                         <tr>
 							<td><input type="checkbox" name="nick" value="<%= num %>"></td>
@@ -67,6 +67,7 @@
 <script src="/flatlib/js/bootstrap-paginator.js"></script>
 
 <script>
+	<%if(nickName.pageInfo != null){%>}	
 	<%
 		var page = {};
 		page.limit			= nickName.pageInfo.limit;
@@ -84,6 +85,7 @@
 	}
 
 	$('#page').bootstrapPaginator(options);
+	<%}%>
 	
 	seajs.use(['page/nick_name_list' , 'app/page'] , function(obj , page){
 		obj();
