@@ -3,6 +3,7 @@ var user = require('./controllers/xhs/user');
 var comment = require('./controllers/xhs/comment');
 var common_comment = require('./controllers/xhs/common_comment');
 var article = require('./controllers/xhs/article');
+var tongji = require('./controllers/xhs/tongji');
 
 
 
@@ -12,4 +13,5 @@ module.exports = function(app){
 	app.use('/comment', comment);
 	app.use('/common_comment', common_comment);
 	app.use('/article' , article);
+	app.use('/tongji' , tongji);
 }

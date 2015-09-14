@@ -38,22 +38,24 @@
                             <td><a href="#" id="id_<%= num %>"><%= list.id %></a></td>
                             <td class="hidden-phone" id="nickname_<%= num %>"><%= list.nickname %></td>
 							<td>
-								<button class="btn btn-primary">通过</button>
-								<button class="btn btn-danger">删除</button>
+								<button class="btn btn-primary check" flag='1' id="<%= num%>">通过</button>
+								<button class="btn btn-danger check" flag='2' id="<%= num%>">删除</button>
 							</td>
                         </tr>
                         <% num++;});} %>
 
                         </tbody>
                     </table>
+					<div id="page"></div>
+					<div style="clear:both"></div>
 					<label class="label_radio r_off label_all" for="all_checkbox">
 						<input style="float:left" id="all_checkbox" type="radio" name="checkbox"> 全选
 					</label>
 					<label class="label_radio r_off label_all" for="all_not_checkbox">
 					<input style="float:left" id="all_not_checkbox" type="radio" name="checkbox"> 全不选
 				</label>
-					<button class="more_ok btn btn-primary">批量通过</button>
-					<button class="more_not_ok btn btn-danger">批量删除</button>
+					<button class="more_check btn btn-primary" flag="1">批量通过</button>
+					<button class="more_check btn btn-danger" flag="2">批量删除</button>
                 </section>
             </div>
 
@@ -62,10 +64,31 @@
 
     </section>
     <!--main content end-->
+<script src="/flatlib/js/bootstrap-paginator.js"></script>
 
 <script>
-	seajs.use('page/nick_name_list' , function(obj){
+	<%
+		var page = {};
+		page.limit			= nickName.pageInfo.limit;
+		page.page			= nickName.pageInfo.page;
+		page.totalCount		= nickName.pageInfo.totalCount;
+		page.pageNum		= Math.ceil(page.totalCount/page.limit);
+	%>
+	var options = {
+		currentPage:<%=page.page%>,
+		totalPages:<%=page.pageNum%>,
+		numberOfPages:8,
+		pageUrl:function(type , page , current){
+			return "/user/getNickName?flag=<%=flag%>&page="+page
+		}
+	}
+
+	$('#page').bootstrapPaginator(options);
+	
+	seajs.use(['page/nick_name_list' , 'app/page'] , function(obj , page){
 		obj();
+		page();
 	});
+
 </script>
 <%include ../common/foot.html%>

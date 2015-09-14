@@ -77,6 +77,13 @@ router.post('/getUserById', function(req, res, next) {
 /*昵称筛选*/
 router.get('/getNickName', function(req, res, next) {
 
+	var data = req.query;
+	data.num = 50;
+
+	if(data.page == 'undefined'){
+		data.page = 1;
+	}
+
 	var options = {
 		'userInfo'		: {
 			'url'	: '/httpclient/adminUser/getCurrentUser',
@@ -85,17 +92,22 @@ router.get('/getNickName', function(req, res, next) {
 		},
 		'nickName'		: {
 			'url'	: '/httpclient/nick/getNickListByPage',
-			'data'	: '',
+			'data'	: data,
 			'method': 'POST'
 		}
 	};
 
-	remote(req , res , options , function(data){
-		data.userInfo = data.userInfo.userInfo;
-		res.render('xhs/user/nick_name_list' , data );
+
+	remote(req , res , options , function(remotedata){
+		remotedata.userInfo = remotedata.userInfo.userInfo;
+		remotedata.flag = data.flag;
+		console.log(remotedata);
+		res.render('xhs/user/nick_name_list' , remotedata );
 	});
 
 });
+
+
 
 /*审核通过*/
 router.post('/filterNick', function(req, res, next) {
@@ -111,8 +123,17 @@ router.post('/filterNick', function(req, res, next) {
 	};
 
 	remote(req , res , options , function(data){
-		console.log(data);
-		res.end();
+		if('SUCCESS' == data.check.code || 'RESULT_EMPTY' == data.check.code){
+			var data = {
+				'title' : "昵称过滤",
+				'content' : "过滤成功"
+			}
+			res.render('xhs/common/alert' , data , function(err , html){
+				res.send(html);
+			});
+		}else{
+			res.end();
+		}
 		//res.render('xhs/user/nick_name_list' , data );
 	});
 

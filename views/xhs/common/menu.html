@@ -10,11 +10,17 @@
                     <span>发布管理</span>
                 </a>
             </li>
-			<li>
-                <a class="" href="/user/getNickName">
-                    <i class="icon-dashboard"></i>
+			<li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-laptop"></i>
                     <span>昵称筛选</span>
                 </a>
+                <ul class="sub">
+                    <li><a  href="/user/getNickName?flag=0">未筛选的昵称</a></li>
+                    <li><a  href="/user/getNickName?flag=1">通过的昵称</a></li>
+                    <li><a  href="/user/getNickName?flag=2">未通过的昵称</a></li>
+                    <!--<li><a  href="/video/selfVideoList">添加分类</a></li>-->
+                </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;" >
@@ -35,6 +41,7 @@
                 <ul class="sub">
                     <li><a  href="/article/article_list">每天发送的文章</a></li>
                     <li><a  href="/article/jixiao">已发布的评论</a></li>
+                    <li><a  href="/tongji/zongliang">总量</a></li>
                 </ul>
             </li>
 

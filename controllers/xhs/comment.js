@@ -165,7 +165,6 @@ router.post('/push_comment' , function(req , res , next){
 	data.commentList = JSON.parse(data.commentList);
 	baseRequest.post(url , data , function(err , response , body){
 		var jsonStr = JSON.parse(body);
-        console.log(jsonStr);
 		if('SUCCESS' == jsonStr.code || 'RESULT_EMPTY' == jsonStr.code){
 			var data = {
 				'title' : "评论",
