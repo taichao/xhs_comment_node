@@ -214,7 +214,6 @@ router.get('/channelCommentList' , function(req , res , next){
 	var url = '/article/getCommentsByNews';
 
 	var data = req.query;
-	data.newsid = '34'
 	data.page = 1;
 	data.num = 50;
 	console.log(data);

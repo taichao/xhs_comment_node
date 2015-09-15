@@ -114,6 +114,10 @@ define(function(require , exports , module) {
 					data	: {title:title}
 				})
 				.done(function(data){
+					if(data == ''){
+						layer.allowScroll();
+						layer.closeLayer();
+					}
 					$('body').append(data);
 				})
 				.fail(function(data){
